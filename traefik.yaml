@@ -9,4 +9,20 @@ spec:
     rbac.enabled: "true"
     ssl.enabled: "true"
     metrics.prometheus.enabled: "true"
-    kubernetes.ingressEndpoint.useDefaultPublishedService: "true"
+    kubernetes:
+      ingressEndpoint:
+        hostname: traefik
+        useDefaultPublishedService: "true"
+    deployment:
+      hostPort:
+        httpEnabled: "true"
+        httpPort: 80
+        httpsEnabled: "true"
+        httpsPort: 443
+        dashboardEnabled: "true"
+        dashboardPort: 8080
+    serviceType: NodePort
+    service:
+      nodePorts:
+        http: 80
+        https: 443
