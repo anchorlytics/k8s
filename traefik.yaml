@@ -4,8 +4,10 @@ metadata:
   name: traefik
   namespace: kube-system
 spec:
-  chart: stable/traefik:1.7
-  set:
+  chart: stable/traefik
+  version: 1.7
+  targetNamespace: kube-system
+  valuesContent: |-
     rbac.enabled: "true"
     ssl.enabled: "true"
     metrics.prometheus.enabled: "true"
