@@ -5,26 +5,22 @@ metadata:
   namespace: kube-system
 spec:
   chart: stable/traefik
-  version: 1.7
+  version: 1.85.0
   targetNamespace: kube-system
   valuesContent: |-
     rbac.enabled: "true"
-    ssl.enabled: "true"
-    metrics.prometheus.enabled: "true"
+    ssl.enabled: "false"
+    metrics.prometheus.enabled: "false"
     kubernetes:
       ingressEndpoint:
         hostname: traefik
         useDefaultPublishedService: "true"
-    deployment:
-      hostPort:
-        httpEnabled: "true"
-        httpPort: 80
-        httpsEnabled: "true"
-        httpsPort: 443
-        dashboardEnabled: "true"
-        dashboardPort: 8080
+    dashboard:
+      enabled: "true"
+      domain: traefik.home.seanho.com
+      serviceType: ClusterIP
     serviceType: NodePort
     service:
       nodePorts:
-        http: 80
-        https: 443
+        http:  30080
+        https: 30443
