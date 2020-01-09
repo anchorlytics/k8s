@@ -1,0 +1,14 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: metallb
+  namespace: kube-system
+spec:
+  chart: stable/metallb
+  version: 0.12.0
+  targetNamespace: default
+  valuesContent: |-
+    arpAddresses: 10.90.4.96/26
+    prometheus:
+      serviceMonitor:
+        enabled: false #default
