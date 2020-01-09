@@ -13,9 +13,13 @@ spec:
     metrics.prometheus.enabled: "true"
     kubernetes:
       ingressEndpoint:
-        hostname: traefik.home.seanho.com
+        hostname: traefik
         useDefaultPublishedService: "true"
     serviceType: NodePort
+    dashboard:
+      enabled: "true"
+      domain: traefik.home.seanho.com
+      serviceType: NodePort
     deployment:
       hostPort:
         httpEnabled: "true"
