@@ -8,19 +8,20 @@ spec:
   version: 1.85.0
   targetNamespace: kube-system
   valuesContent: |-
-    rbac.enabled: "true"
-    ssl.enabled: "false"
-    metrics.prometheus.enabled: "false"
+    rbac.enabled: true
+    ssl.enabled: false
+    metrics.prometheus.enabled: false
     kubernetes:
       ingressEndpoint:
         hostname: traefik
-        useDefaultPublishedService: "true"
-    dashboard:
-      enabled: "true"
-      domain: traefik.home.seanho.com
-      serviceType: ClusterIP
+        useDefaultPublishedService: true
     serviceType: NodePort
-    service:
-      nodePorts:
-        http:  30080
-        https: 30443
+    dashboard:
+      enabled: true
+      domain: traefik.home.seanho.com
+      serviceType: NodePort
+    deployment:
+      hostPort:
+        httpEnabled: true
+        httpsEnabled: true
+        dashboardEnabled: true

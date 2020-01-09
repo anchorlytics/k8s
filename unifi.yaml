@@ -21,12 +21,11 @@ spec:
       type: NodePort
       port: 10001  # udp
     ingress:
-      enabled: false
+      enabled: true
       annotations:
         kubernetes.io/ingress.class: traefik
       path: /
-      hosts:
-        - unifi.home.seanho.com
+      hosts: unifi.home.seanho.com
     timezone: America/Vancouver
     runAsRoot: false
     UID: 999
