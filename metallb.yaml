@@ -13,4 +13,4 @@ spec:
         - name: LAN
           protocol: layer2
           addresses:
-            - 10.90.4.96/26
+            - 10.90.4.96/27
