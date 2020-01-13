@@ -6,9 +6,11 @@ metadata:
 spec:
   chart: stable/metallb
   version: 0.12.0
-  targetNamespace: default
+  targetNamespace: kube-system
   valuesContent: |-
-    arpAddresses: 10.90.4.96/26
-    prometheus:
-      serviceMonitor:
-        enabled: false #default
+    configInline:
+      address-pools:
+        - name: LAN
+          protocol: layer2
+          addresses:
+            - 10.90.4.96/26

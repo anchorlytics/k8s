@@ -7,21 +7,14 @@ spec:
   chart: stable/traefik
   version: 1.85.0
   targetNamespace: kube-system
+  set:
+    rbac.enabled: "true"
+    ssl.enabled: "false"
+    metrics.prometheus.enabled: "false"
   valuesContent: |-
-    rbac.enabled: true
-    ssl.enabled: false
-    metrics.prometheus.enabled: false
-    kubernetes:
-      ingressEndpoint:
-        hostname: traefik
-        useDefaultPublishedService: true
-    serviceType: NodePort
+    serviceType: LoadBalancer
+    loadBalancerIP: 10.90.4.96
     dashboard:
       enabled: true
       domain: traefik.home.seanho.com
-      serviceType: NodePort
-    deployment:
-      hostPort:
-        httpEnabled: true
-        httpsEnabled: true
-        dashboardEnabled: true
+      serviceType: LoadBalancer
