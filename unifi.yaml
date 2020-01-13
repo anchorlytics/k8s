@@ -4,32 +4,21 @@ metadata:
   name: unifi
   namespace: kube-system
 spec:
-  chart: jacobalberty/unifi
-  version: 5.6.40
+  chart: stable/unifi
+  version: 0.5.2
   targetNamespace: default
   valuesContent: |-
-    guiService:
-      type: ClusterIP
-      port: 8443
-    controllerService:
-      type: NodePort
-      port: 8080
-    stunService:
-      type: NodePort
-      port: 3478   # udp
-    discoveryService:
-      type: NodePort
-      port: 10001  # udp
+    image:
+      tag: 5.6
+    unifiedService:
+      enabled: true
+      type: LoadBalancer
     ingress:
       enabled: true
       annotations:
         kubernetes.io/ingress.class: traefik
-      path: /
       hosts: unifi.home.seanho.com
     timezone: America/Vancouver
-    runAsRoot: false
-    UID: 999
-    GID: 999
     persistence:
       enabled: true
       accessMode: ReadWriteOnce

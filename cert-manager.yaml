@@ -6,4 +6,7 @@ metadata:
 spec:
   chart: jetstack/cert-manager
   repo: "https://charts.jetstack.io"
-  targetNamespace: default
+  version: 0.12
+  targetNamespace: cert-manager
+  valuesContent: |-
+    webhook.enabled: false
