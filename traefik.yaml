@@ -16,3 +16,6 @@ spec:
     dashboard:
       enabled: true
       domain: traefik.home.seanho.com
+      ingress:
+        annotations:
+          kubernetes.io/ingress.class: traefik
