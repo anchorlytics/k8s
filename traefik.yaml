@@ -13,6 +13,7 @@ spec:
     metrics.prometheus.enabled: "false"
   valuesContent: |-
     serviceType: LoadBalancer
+    loadBalancerIP: 10.90.4.96
     dashboard:
       enabled: true
       domain: traefik.home.seanho.com
