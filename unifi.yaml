@@ -10,9 +10,21 @@ spec:
   valuesContent: |-
     image:
       tag: 5.6
-    unifiedService:
-      enabled: true
+    controllerService:
       type: LoadBalancer
+      loadBalancerIP: 10.90.4.97
+      annotations:
+        metallb.universe.tf/allow-shared-ip: unifi
+    stunService:
+      type: LoadBalancer
+      loadBalancerIP: 10.90.4.97
+      annotations:
+        metallb.universe.tf/allow-shared-ip: unifi
+    discoveryService:
+      type: LoadBalancer
+      loadBalancerIP: 10.90.4.97
+      annotations:
+        metallb.universe.tf/allow-shared-ip: unifi
     ingress:
       enabled: true
       annotations:
@@ -20,7 +32,3 @@ spec:
       hosts:
         - unifi.home.seanho.com
     timezone: America/Vancouver
-    persistence:
-      enabled: true
-      accessMode: ReadWriteOnce
-      size: 5Gi
