@@ -16,7 +16,7 @@ spec:
     loadBalancerIP: 10.90.4.96
     dashboard:
       enabled: true
-      domain: traefik.home.seanho.com
+      domain: ingress.home.seanho.com
       ingress:
         annotations:
           kubernetes.io/ingress.class: traefik
