@@ -30,5 +30,6 @@ spec:
       annotations:
         kubernetes.io/ingress.class: traefik
       hosts:
-        - unifi.home.seanho.com
+        - traefik.home.seanho.com
+      path: /unifi
     timezone: America/Vancouver
