@@ -25,10 +25,4 @@ spec:
       loadBalancerIP: 10.90.4.97
       annotations:
         metallb.universe.tf/allow-shared-ip: unifi
-    ingress:
-      enabled: true
-      annotations:
-        kubernetes.io/ingress.class: traefik
-      hosts:
-        - unifi.home.seanho.com
     timezone: America/Vancouver
