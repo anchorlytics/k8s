@@ -7,6 +7,21 @@ spec:
   chart: jetstack/cert-manager
   repo: "https://charts.jetstack.io"
   version: 0.12
-  targetNamespace: cert-manager
   valuesContent: |-
     webhook.enabled: false
+
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: le-staging
+spec:
+  acme:
+    email: letsencrypt@seanho.com
+    server: "https://acme-staging-v02.api.letsencrypt.org/directory"
+    privateKeySecretRef:
+      name: le-key
+    solvers:
+      - http01:
+          ingress:
+            class: traefik
