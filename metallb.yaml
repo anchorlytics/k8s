@@ -6,7 +6,6 @@ metadata:
 spec:
   chart: stable/metallb
   version: 0.12.0
-  targetNamespace: kube-system
   valuesContent: |-
     configInline:
       address-pools:
