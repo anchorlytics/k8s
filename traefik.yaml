@@ -6,7 +6,6 @@ metadata:
 spec:
   chart: stable/traefik
   version: 1.85.0
-  targetNamespace: kube-system
   valuesContent: |-
     serviceType: LoadBalancer
     loadBalancerIP: 10.90.4.96
