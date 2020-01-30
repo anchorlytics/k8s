@@ -20,4 +20,3 @@ spec:
       enabled: true
     ssl:
       enabled: false
-

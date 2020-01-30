@@ -1,0 +1,16 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: gitea
+  namespace: kube-system
+spec:
+  repo: "https://charts.k8s.land"
+  chart: k8s-land/gitea
+  version: 1.2.1
+  targetNamespace: default
+  valuesContent: |-
+    ingress:
+      hostname: gitea.home.seanho.com
+    persistence:
+      annotations:
+        "helm.sh/resource-policy": keep
