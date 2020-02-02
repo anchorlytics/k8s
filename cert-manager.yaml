@@ -20,7 +20,7 @@ spec:
     email: letsencrypt@seanho.com
     server: "https://acme-staging-v02.api.letsencrypt.org/directory"
     privateKeySecretRef:
-      name: le-key
+      name: le-staging-key
     solvers:
       - http01:
           ingress:
