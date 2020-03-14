@@ -12,23 +12,23 @@ spec:
       tag: 5.6
     guiService:
       type: LoadBalancer
-      loadBalancerIP: 10.90.4.97
+      loadBalancerIP: 10.90.3.97
       port: 443
       annotations:
         metallb.universe.tf/allow-shared-ip: unifi
     controllerService:
       type: LoadBalancer
-      loadBalancerIP: 10.90.4.97
+      loadBalancerIP: 10.90.3.97
       annotations:
         metallb.universe.tf/allow-shared-ip: unifi
     stunService:
       type: LoadBalancer
-      loadBalancerIP: 10.90.4.97
+      loadBalancerIP: 10.90.3.97
       annotations:
         metallb.universe.tf/allow-shared-ip: unifi
     discoveryService:
       type: LoadBalancer
-      loadBalancerIP: 10.90.4.97
+      loadBalancerIP: 10.90.3.97
       annotations:
         metallb.universe.tf/allow-shared-ip: unifi
     timezone: America/Vancouver
