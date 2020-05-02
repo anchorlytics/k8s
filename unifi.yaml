@@ -5,7 +5,7 @@ metadata:
   namespace: kube-system
 spec:
   chart: stable/unifi
-  version: 0.5.2
+  version: 0.7.0
   targetNamespace: default
   valuesContent: |-
     image:
