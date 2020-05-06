@@ -11,6 +11,16 @@ spec:
   valuesContent: |-
     ingress:
       hostname: gitea.home.seanho.com
+      certManager: false
+      tls:
+    service:
+      http:
+        externalHost: gitea.home.seanho.com
+      ssh:
+        serviceType: LoadBalancer
+        port: 26
+        externalHost: gitea.home.seanho.com
     persistence:
+      enabled: true
       annotations:
         "helm.sh/resource-policy": keep
