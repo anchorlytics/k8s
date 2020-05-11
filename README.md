@@ -17,5 +17,5 @@ for more info on this CRD.
 Secrets referenced in these charts are defined in a separate private repo.
 
 Remember to
-[delete the old install pod](https://github.com/rancher/k3s/issues/187)
+[delete all resources](https://github.com/rancher/k3s/issues/187)
 before applying a modified manifest.
