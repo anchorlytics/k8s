@@ -11,25 +11,34 @@ spec:
     webhook.enabled: false
 
 ---
-#apiVersion: cert-manager.io/v1alpha2
-#kind: Issuer
-#metadata:
-#  name: selfsigned
-#spec:
-#  selfSigned: {}
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: le-staging
+spec:
+  acme:
+    email: letsencrypt@seanho.com
+    server: "https://acme-staging-v02.api.letsencrypt.org/directory"
+    privateKeySecretRef:
+      name: le-staging-key
+    solvers:
+      - http01:
+          ingress:
+            class: traefik
 
 ---
-#apiVersion: cert-manager.io/v1alpha2
-#kind: ClusterIssuer
-#metadata:
-#  name: le-staging
-#spec:
-#  acme:
-#    email: letsencrypt@seanho.com
-#    server: "https://acme-staging-v02.api.letsencrypt.org/directory"
-#    privateKeySecretRef:
-#      name: le-staging-key
-#    solvers:
-#      - http01:
-#          ingress:
-#            class: traefik
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: le-prod
+spec:
+  acme:
+    email: letsencrypt@seanho.com
+    server: "https://acme-v02.api.letsencrypt.org/directory"
+    privateKeySecretRef:
+      name: le-prod-key
+    solvers:
+      - http01:
+          ingress:
+            class: traefik
+
