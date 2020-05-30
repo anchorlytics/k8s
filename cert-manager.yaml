@@ -4,9 +4,9 @@ metadata:
   name: cert-manager
   namespace: kube-system
 spec:
-  chart: jetstack/cert-manager
+  chart: cert-manager
   repo: "https://charts.jetstack.io"
-  version: 0.14.3
+  version: 0.15.1
   valuesContent: |-
     webhook.enabled: false
 
