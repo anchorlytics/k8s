@@ -8,7 +8,7 @@ spec:
   repo: "https://charts.jetstack.io"
   version: 0.15.1
   valuesContent: |-
-    webhook.enabled: false
+    webhook.enabled: true
 
 ---
 apiVersion: cert-manager.io/v1alpha2
