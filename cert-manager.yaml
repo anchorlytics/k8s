@@ -28,9 +28,12 @@ spec:
     privateKeySecretRef:
       name: le-staging-key
     solvers:
-      - http01:
-          ingress:
-            class: traefik
+      - dns01:
+          cloudflare:
+            email: cloudflare@seanho.com
+            apiTokenSecretRef:
+              name: cf-api-token
+              key: api-token
 
 ---
 apiVersion: cert-manager.io/v1alpha2
