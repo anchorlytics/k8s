@@ -17,7 +17,3 @@ spec:
           protocol: layer2
           addresses:
             - 10.90.4.96/27
-        - name: IOT
-          protocol: layer2
-          addresses:
-            - 10.90.8.96/27
