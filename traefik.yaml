@@ -5,7 +5,7 @@ metadata:
   namespace: kube-system
 spec:
   chart: stable/traefik
-  version: 1.86.2
+  version: 1.87.1
   valuesContent: |-
     serviceType: LoadBalancer
     loadBalancerIP: 10.90.4.96
@@ -13,9 +13,16 @@ spec:
       enabled: true
       domain: ingress.home.seanho.com
       ingress:
+        tls:
+          - hosts:
+            - ingress.home.seanho.com
+            secretName: traefik-dashboard-tls
         annotations:
-          kubernetes.io/ingress.class: traefik
+          cert-manager.io/cluster-issuer: le-staging
+    ssl:
+      enabled: true
     rbac:
       enabled: true
-    ssl:
-      enabled: false
+    metrics:
+      prometheus:
+        enabled: true
