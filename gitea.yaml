@@ -19,14 +19,8 @@ spec:
       hostname: gitea.home.seanho.com
       certManager: true
       annotations:
-        certmanager.k8s.io/cluster-issuer: le-staging
-      tls:
-        - hosts:
-          - gitea.home.seanho.com
-          secretName: gitea-tls
+        certmanager.io/cluster-issuer: le-staging
     service:
-      http:
-        externalHost: gitea.home.seanho.com
       ssh:
         serviceType: LoadBalancer
         port: 26
@@ -35,5 +29,6 @@ spec:
           - 10.90.4.98
     persistence:
       enabled: true
+      accessMode: ReadWriteOnce
       annotations:
         "helm.sh/resource-policy": keep
