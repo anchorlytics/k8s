@@ -20,7 +20,6 @@ apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
   name: le-staging
-  namespace: cert-manager
 spec:
   acme:
     email: letsencrypt@seanho.com
@@ -40,7 +39,6 @@ apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
   name: le-prod
-  namespace: cert-manager
 spec:
   acme:
     email: letsencrypt@seanho.com
