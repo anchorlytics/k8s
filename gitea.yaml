@@ -17,9 +17,10 @@ spec:
   valuesContent: |-
     ingress:
       hostname: gitea.home.seanho.com
-      certManager: true
-      annotations:
-        certmanager.io/cluster-issuer: le-staging
+      tls:
+        - hosts:
+          - gitea.home.seanho.com
+          secretName: home-seanho-tls
     service:
       ssh:
         serviceType: LoadBalancer
