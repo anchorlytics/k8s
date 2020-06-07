@@ -17,6 +17,15 @@ spec:
 
 ---
 apiVersion: cert-manager.io/v1alpha2
+kind: Issuer
+metadata:
+  name: self
+  namespace: default
+spec:
+  selfSigned: {}
+
+---
+apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
   name: le-staging
@@ -57,11 +66,8 @@ metadata:
   name: home-tls
   namespace: default
 spec:
-  secretName: home-tls
-  issuerRef:
-    name: le-staging
-    kind: ClusterIssuer
+  secretName: home-seanho-tls
   commonName: '*.home.seanho.com'
-  dnsNames:
-  - '*.home.seanho.com'
+  issuerRef:
+    name: self
 
