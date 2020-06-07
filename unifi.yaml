@@ -6,12 +6,15 @@ metadata:
   namespace: kube-system
 spec:
   chart: stable/unifi
-  version: 0.7.0
+  version: 0.8.1
   targetNamespace: unifi
   valuesContent: |-
     image:
       tag: 5.6
     timezone: America/Vancouver
+    customCert:
+      enabled: true
+      secretName: mgmt-seanho-tls
     guiService:
       type: LoadBalancer
       port: 443
