@@ -12,27 +12,7 @@ spec:
     image:
       tag: 5.6
     timezone: America/Vancouver
-    customCert:
+    unifiedService:
       enabled: true
-      secretName: mgmt-seanho-tls
-    guiService:
-      type: LoadBalancer
-      port: 443
-      loadBalancerIP: 10.90.3.97
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
-    controllerService:
       type: LoadBalancer
       loadBalancerIP: 10.90.3.97
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
-    stunService:
-      type: LoadBalancer
-      loadBalancerIP: 10.90.3.97
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
-    discoveryService:
-      type: LoadBalancer
-      loadBalancerIP: 10.90.3.97
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
