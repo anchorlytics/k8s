@@ -18,20 +18,30 @@ spec:
     images:
       gitea: gitea/gitea:1.12
     ingress:
-      hostname: gitea.home.seanho.com
-      tls:
-        - hosts:
-          - gitea.home.seanho.com
-          secretName: home-seanho-tls
+      enabled: false
     service:
+      http:
+        serviceType: LoadBalancer
+        externalPort: 80
+        externalHost: gitea.home.seanho.com
+        annotations:
+          metallb.universe.tf/allow-shared-ip: gitea
       ssh:
         serviceType: LoadBalancer
         port: 26
+        externalPort: 26
         externalHost: gitea.home.seanho.com
         externalIPs:
           - 10.90.4.98
+        annotations:
+          metallb.universe.tf/allow-shared-ip: gitea
     persistence:
       enabled: true
+      existingGiteaClaim: gitea
       accessMode: ReadWriteOnce
       annotations:
         "helm.sh/resource-policy": keep
+    mariadb:
+      master:
+        persistence:
+          enabled: true
