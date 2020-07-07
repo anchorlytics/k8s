@@ -1,0 +1,11 @@
+apiVersion: ceph.rook.io/v1
+kind: CephNFS
+metadata:
+  name: nfs
+  namespace: rook-ceph
+spec:
+  rados:
+    pool: shared
+    namespace: ganesha
+  server:
+    active: 2

@@ -1,0 +1,24 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStore
+metadata:
+  name: big
+  namespace: rook-ceph
+spec:
+  metadataPool:
+    failureDomain: host
+    replicated:
+      size: 3
+    parameters:
+      min_size: 2
+    deviceClass: nvme
+  dataPool:
+    failureDomain: host
+    replicated:
+      size: 2
+    parameters:
+      min_size: 1
+    deviceClass: hdd
+  gateway:
+    type: s3
+    port: 80
+    instances: 3

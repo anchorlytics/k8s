@@ -8,6 +8,7 @@ spec:
     image: ceph/ceph:v14.2.9
   dashboard:
     enabled: true
+    type: LoadBalancer
   monitoring:
     enabled: true
   mgr:
