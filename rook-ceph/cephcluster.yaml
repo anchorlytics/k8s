@@ -1,0 +1,13 @@
+apiVersion: ceph.rook.io/v1
+kind: CephCluster
+metadata:
+  name: rook-ceph
+  namespace: rook-ceph
+spec:
+  cephVersion:
+    image: ceph/ceph:v14.2.9
+  dashboard:
+    enabled: true
+  dataDirHostPath: /var/lib/rook
+  storage:
+    useAllNodes: true
