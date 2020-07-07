@@ -8,6 +8,30 @@ spec:
     image: ceph/ceph:v14.2.9
   dashboard:
     enabled: true
+  monitoring:
+    enabled: true
+  mgr:
+    modules:
+      - name: pg_autoscaler
+        enabled: true
   dataDirHostPath: /var/lib/rook
   storage:
     useAllNodes: true
+    devicePathFilter: '^/dev/disk/by-partlabel/ceph-'
+    config:
+      encryptedDevice: true
+    nodes:
+      - jericho:
+        config:
+          metadataDevice: /dev/nvme0n1p1
+  placement:
+    all:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+              - key: role
+                operator: In
+                values:
+                  - ceph
+
