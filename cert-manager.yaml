@@ -17,15 +17,6 @@ spec:
 
 ---
 apiVersion: cert-manager.io/v1alpha2
-kind: Issuer
-metadata:
-  name: self
-  namespace: default
-spec:
-  selfSigned: {}
-
----
-apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
   name: le-staging
@@ -42,44 +33,3 @@ spec:
             apiTokenSecretRef:
               name: cf-api-token
               key: api-token
-
----
-apiVersion: cert-manager.io/v1alpha2
-kind: ClusterIssuer
-metadata:
-  name: le-prod
-spec:
-  acme:
-    email: letsencrypt@seanho.com
-    server: "https://acme-v02.api.letsencrypt.org/directory"
-    privateKeySecretRef:
-      name: le-prod-key
-    solvers:
-      - http01:
-          ingress:
-            class: traefik
-
----
-apiVersion: cert-manager.io/v1alpha2
-kind: Certificate
-metadata:
-  name: home-seanho-tls
-  namespace: default
-spec:
-  secretName: home-seanho-tls
-  commonName: '*.home.seanho.com'
-  issuerRef:
-    name: self
-
----
-apiVersion: cert-manager.io/v1alpha2
-kind: Certificate
-metadata:
-  name: mgmt-seanho-tls
-  namespace: default
-spec:
-  secretName: mgmt-seanho-tls
-  commonName: '*.mgmt.seanho.com'
-  issuerRef:
-    name: self
-
