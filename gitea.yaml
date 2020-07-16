@@ -22,22 +22,13 @@ spec:
     service:
       http:
         serviceType: LoadBalancer
-        externalPort: 80
+        port: 80
         externalHost: gitea.home.seanho.com
-        annotations:
-          metallb.universe.tf/allow-shared-ip: gitea
       ssh:
         serviceType: LoadBalancer
         port: 26
-        externalPort: 26
-        externalHost: gitea.home.seanho.com
-        externalIPs:
-          - 10.90.4.98
-        annotations:
-          metallb.universe.tf/allow-shared-ip: gitea
     persistence:
       enabled: true
-      existingGiteaClaim: gitea
       accessMode: ReadWriteOnce
       annotations:
         "helm.sh/resource-policy": keep
@@ -45,3 +36,30 @@ spec:
       master:
         persistence:
           enabled: true
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitea-gitea-ssh
+  namespace: gitea
+  labels:
+    app: gitea-gitea
+  annotations:
+    metallb.universe.tf/allow-shared-ip: gitea
+spec:
+  loadBalancerIP: 10.90.4.98
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitea-gitea-http
+  namespace: gitea
+  labels:
+    app: gitea-gitea
+  annotations:
+    metallb.universe.tf/allow-shared-ip: gitea
+spec:
+  loadBalancerIP: 10.90.4.98
+
