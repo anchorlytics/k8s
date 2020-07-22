@@ -11,7 +11,7 @@ spec:
   targetNamespace: gitea
   valuesContent: |-
     images:
-      gitea: gitea/gitea:1.12
+      gitea: gitea/gitea:1.12.2
     ingress:
       enabled: false
     service:

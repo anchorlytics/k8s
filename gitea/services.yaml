@@ -9,6 +9,13 @@ metadata:
   annotations:
     metallb.universe.tf/allow-shared-ip: gitea
 spec:
+  selector:
+    app: gitea-gitea
+  ports:
+    - name: ssh
+      protocol: TCP
+      port: 26
+      targetPort: ssh
   loadBalancerIP: 10.90.4.98
 
 ---
@@ -22,5 +29,12 @@ metadata:
   annotations:
     metallb.universe.tf/allow-shared-ip: gitea
 spec:
+  selector:
+    app: gitea-gitea
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
   loadBalancerIP: 10.90.4.98
 
