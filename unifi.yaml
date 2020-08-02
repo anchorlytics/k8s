@@ -1,4 +1,10 @@
-# delete: helmchart deploy po svc pvc cm secret
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: unifi
+
+---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
@@ -12,7 +18,24 @@ spec:
     image:
       tag: 5.6
     timezone: America/Vancouver
-    unifiedService:
-      enabled: true
+    guiService:
+      type: LoadBalancer
+      port: 443
+      loadBalancerIP: 10.90.3.97
+      annotations:
+        metallb.universe.tf/allow-shared-ip: unifi
+    controllerService:
       type: LoadBalancer
       loadBalancerIP: 10.90.3.97
+      annotations:
+        metallb.universe.tf/allow-shared-ip: unifi
+    stunService:
+      type: LoadBalancer
+      loadBalancerIP: 10.90.3.97
+      annotations:
+        metallb.universe.tf/allow-shared-ip: unifi
+    discoveryService:
+      type: LoadBalancer
+      loadBalancerIP: 10.90.3.97
+      annotations:
+        metallb.universe.tf/allow-shared-ip: unifi
