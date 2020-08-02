@@ -5,7 +5,7 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v14.2.9
+    image: ceph/ceph:v15.2.4
   dashboard:
     enabled: true
     type: LoadBalancer
@@ -18,7 +18,7 @@ spec:
   dataDirHostPath: /var/lib/rook
   storage:
     useAllNodes: true
-    devicePathFilter: '^/dev/disk/by-partlabel/ceph-'
+    devicePathFilter: '^/dev/mapper/ceph-'
     config:
       encryptedDevice: true
     nodes:
