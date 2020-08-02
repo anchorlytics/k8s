@@ -22,8 +22,8 @@ spec:
       data_devices:
         rotational: 1
       db_devices:
-        vendor: SanDisk
-      db_slots: 6
+        rotational: 0
+        size: '1TB:'
     placement:
       nodeAffinity:
         nodeSelector:
@@ -32,7 +32,8 @@ spec:
     spec:
       encrypted: true
       data_devices:
-        vendor: SanDisk
+        rotational: 0
+        size: '1TB:'
     placement:
       nodeAffinity:
         nodeSelector:
