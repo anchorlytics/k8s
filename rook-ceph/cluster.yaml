@@ -15,24 +15,25 @@ spec:
     modules:
       - name: pg_autoscaler
         enabled: true
-  dataDirHostPath: /var/lib/rook
-  storage:
-    useAllNodes: true
-    devicePathFilter: '^/dev/mapper/ceph-'
-    config:
-      encryptedDevice: true
-    nodes:
-      - jericho:
-        config:
-          metadataDevice: /dev/nvme0n1p1
-  placement:
-    all:
+  driveGroups:
+  - name: spanish-hdd
+    spec:
+      encrypted: true
+      data_devices:
+        rotational: 1
+      db_devices:
+        vendor: SanDisk
+      db_slots: 6
+    placement:
       nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-              - key: role
-                operator: In
-                values:
-                  - ceph
-
+        nodeSelector:
+          kubernetes.io/hostname: spanish
+  - name: spanish-nvme
+    spec:
+      encrypted: true
+      data_devices:
+        vendor: SanDisk
+    placement:
+      nodeAffinity:
+        nodeSelector:
+          kubernetes.io/hostname: spanish
