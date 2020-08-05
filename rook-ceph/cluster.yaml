@@ -38,3 +38,25 @@ spec:
       nodeAffinity:
         nodeSelector:
           kubernetes.io/hostname: spanish
+  - name: jericho-hdd
+    spec:
+      encrypted: true
+      data_devices:
+        rotational: 1
+      db_devices:
+        rotational: 0
+        model: 'SX8200'
+    placement:
+      nodeAffinity:
+        nodeSelector:
+          kubernetes.io/hostname: jericho
+  - name: jericho-nvme
+    spec:
+      encrypted: true
+      data_devices:
+        rotational: 0
+        model: 'PM951'
+    placement:
+      nodeAffinity:
+        nodeSelector:
+          kubernetes.io/hostname: jericho
