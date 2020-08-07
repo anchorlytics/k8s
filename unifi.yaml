@@ -23,11 +23,15 @@ spec:
       hosts:
         - unifi.home.seanho.com
       tls:
-        secretName: unifi-tls
-        hosts:
-          - unifi.home.seanho.com
+        - secretName: unifi-tls
+          hosts:
+            - unifi.home.seanho.com
       annotations:
         cert-manager.io/cluster-issuer: le-staging
+    customCert:
+      enabled: true
+      isChain: true
+      certSecret: unifi-tls
     controllerService:
       type: LoadBalancer
       loadBalancerIP: 10.90.3.97
