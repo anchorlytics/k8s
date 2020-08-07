@@ -16,7 +16,9 @@ spec:
         tls:
           - hosts:
             - ingress.home.seanho.com
-            secretName: home-seanho-tls
+            secretName: traefik-tls
+        annotations:
+          cert-manager.io/cluster-issuer: le-staging
     ssl:
       enabled: true
     rbac:
