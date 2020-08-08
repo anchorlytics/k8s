@@ -21,7 +21,7 @@ spec:
     ingress:
       hostname: git.home.seanho.com
       annotations:
-        cert-manager.io/cluster-issuer: le-staging
+        cert-manager.io/cluster-issuer: le-prod
       tls:
         - secretName: gitea-tls
           hosts:
