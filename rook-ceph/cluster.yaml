@@ -27,7 +27,7 @@ spec:
     placement:
       nodeAffinity:
         nodeSelector:
-          kubernetes.io/hostname: spanish
+          kubernetes.io/hostname: spanish.home.seanho.com
   - name: spanish-nvme
     spec:
       encrypted: true
@@ -37,7 +37,7 @@ spec:
     placement:
       nodeAffinity:
         nodeSelector:
-          kubernetes.io/hostname: spanish
+          kubernetes.io/hostname: spanish.home.seanho.com
   - name: jericho-hdd
     spec:
       encrypted: true
@@ -49,7 +49,7 @@ spec:
     placement:
       nodeAffinity:
         nodeSelector:
-          kubernetes.io/hostname: jericho
+          kubernetes.io/hostname: jericho.home.seanho.com
   - name: jericho-nvme
     spec:
       encrypted: true
@@ -59,4 +59,4 @@ spec:
     placement:
       nodeAffinity:
         nodeSelector:
-          kubernetes.io/hostname: jericho
+          kubernetes.io/hostname: jericho.home.seanho.com
