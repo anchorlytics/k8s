@@ -14,6 +14,9 @@ spec:
   chart: cert-manager
   version: 0.15.1
   targetNamespace: cert-manager
+  ingressShim:
+    defaultIssuerName: le-staging
+    defaultIssuerKind: ClusterIssuer
   extraArgs:
     - "--dns01-recursive-nameservers-only"
     - "--dns01-recursive-nameservers=1.1.1.1:53"
