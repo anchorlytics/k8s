@@ -18,7 +18,7 @@ spec:
             - ingress.home.seanho.com
             secretName: traefik-tls
         annotations:
-          cert-manager.io/cluster-issuer: le-staging
+          cert-manager.io/cluster-issuer: le-prod
     ssl:
       enabled: true
       insecureSkipVerify: true
