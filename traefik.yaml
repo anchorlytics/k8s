@@ -21,6 +21,7 @@ spec:
           cert-manager.io/cluster-issuer: le-prod
     ssl:
       enabled: true
+      enforced: true
       insecureSkipVerify: true
     rbac:
       enabled: true
