@@ -1,0 +1,21 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: rook-ceph-mgr-dashboard
+  namespace: rook-ceph
+  annotations:
+    cert-manager.io/cluster-issuer: le-staging
+spec:
+  tls:
+    - hosts:
+      - ceph.home.seanho.com
+      secretName: rook-ceph-mgr-dashboard-tls
+  rules:
+    - host: ceph.home.seanho.com
+      http:
+        paths:
+          - backend:
+              serviceName: rook-ceph-mgr-dashboard
+              servicePort: https-dashboard
+
