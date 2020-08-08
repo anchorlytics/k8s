@@ -21,6 +21,7 @@ spec:
           cert-manager.io/cluster-issuer: le-staging
     ssl:
       enabled: true
+      insecureSkipVerify: true
     rbac:
       enabled: true
     metrics:
