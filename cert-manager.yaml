@@ -12,8 +12,9 @@ metadata:
 spec:
   repo: "https://charts.jetstack.io"
   chart: cert-manager
-  version: 0.15.1
+  version: 0.16.1
   targetNamespace: cert-manager
+  installCRDs: true
   ingressShim:
     defaultIssuerName: le-staging
     defaultIssuerKind: ClusterIssuer
