@@ -17,7 +17,8 @@ spec:
   targetNamespace: gitea
   valuesContent: |-
     images:
-      gitea: gitea/gitea:1.12.3
+      gitea: "gitea/gitea:1.12.3"
+      memcached: "memcached:1.6.6-alpine"
     ingress:
       enabled: true
       hostname: git.home.seanho.com
