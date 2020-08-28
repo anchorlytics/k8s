@@ -4,8 +4,9 @@ metadata:
   name: metallb
   namespace: kube-system
 spec:
-  chart: stable/metallb
-  version: 0.12.0
+  repo: "https://charts.bitnami.com/bitnami"
+  chart: metallb
+  version: 0.1.21
   valuesContent: |-
     configInline:
       address-pools:
