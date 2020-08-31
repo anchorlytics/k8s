@@ -27,7 +27,7 @@ spec:
           hosts:
             - unifi.home.seanho.com
       annotations:
-        cert-manager.io/cluster-issuer: le-staging
+        cert-manager.io/cluster-issuer: le-prod
     customCert:
       enabled: true
       isChain: true
