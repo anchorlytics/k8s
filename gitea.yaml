@@ -11,30 +11,24 @@ metadata:
   name: gitea
   namespace: kube-system
 spec:
-  repo: "https://charts.k8s.land"
+  repo: "https://dl.gitea.io/charts/"
   chart: gitea
-  version: 1.3.3
+  version: 1.4.4
   targetNamespace: gitea
   valuesContent: |-
-    images:
-      gitea: "gitea/gitea:1.12.3"
-      memcached: "memcached:1.6.6-alpine"
+    gitea:
+      config:
+        APP_NAME: "Anchorlytics Code"
     ingress:
       enabled: true
-      hostname: git.home.seanho.com
-      annotations:
-        cert-manager.io/cluster-issuer: le-prod
+      hosts:
+        - git.home.seanho.com
       tls:
         - secretName: gitea-tls
           hosts:
             - git.home.seanho.com
-    persistence:
-      enabled: true
-      accessMode: ReadWriteOnce
       annotations:
-        "helm.sh/resource-policy": keep
-    mariadb:
-      master:
-        persistence:
-          enabled: true
+        cert-manager.io/cluster-issuer: le-prod
+    persistence:
+      existingClaim: gitea-gitea
 
