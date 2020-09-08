@@ -23,6 +23,7 @@ spec:
       enabled: true
       enforced: true
       insecureSkipVerify: true
+      permanentRedirect: true
     rbac:
       enabled: true
     metrics:
