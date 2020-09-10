@@ -12,15 +12,16 @@ metadata:
 spec:
   repo: "https://charts.jetstack.io"
   chart: cert-manager
-  version: 0.16.1
+  version: 1.0.1
   targetNamespace: cert-manager
-  installCRDs: true
-  ingressShim:
-    defaultIssuerName: le-staging
-    defaultIssuerKind: ClusterIssuer
-  extraArgs:
-    - "--dns01-recursive-nameservers-only"
-    - "--dns01-recursive-nameservers=1.1.1.1:53"
+  valuesContent: |-
+    installCRDs: true
+    ingressShim:
+      defaultIssuerName: le-staging
+      defaultIssuerKind: ClusterIssuer
+    extraArgs:
+      - "--dns01-recursive-nameservers-only"
+      - "--dns01-recursive-nameservers=1.1.1.1:53"
 
 ---
 apiVersion: cert-manager.io/v1alpha2
