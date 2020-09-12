@@ -45,7 +45,7 @@ spec:
         rotational: 1
       db_devices:
         rotational: 0
-        model: 'SX8200'
+        model: 'ADATA SX8200NP'
     placement:
       nodeAffinity:
         nodeSelector:
@@ -55,7 +55,7 @@ spec:
       encrypted: true
       data_devices:
         rotational: 0
-        model: 'PM951'
+        model: 'SAMSUNG MZFLV512HCJH-000MV'
     placement:
       nodeAffinity:
         nodeSelector:
