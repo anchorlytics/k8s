@@ -10,3 +10,12 @@ spec:
   targetNamespace: rook-ceph
   valuesContent: |-
     currentNamespaceOnly: true
+    nodeSelector:
+      ceph: true
+    discover:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: ceph-osd
+                  operator: Exists

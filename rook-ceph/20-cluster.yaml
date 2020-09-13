@@ -15,8 +15,7 @@ spec:
     modules:
       - name: pg_autoscaler
         enabled: true
-  discover:
-    toleration:
+  dataDirHostPath: /var/lib/rook
   driveGroups:
   - name: spanish-hdd
     spec:
