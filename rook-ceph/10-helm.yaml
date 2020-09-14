@@ -13,9 +13,4 @@ spec:
     nodeSelector:
       ceph: true
     discover:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: ceph-osd
-              operator: Exists
+      nodeAffinity: ceph-osd=
