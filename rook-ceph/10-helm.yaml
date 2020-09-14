@@ -16,6 +16,6 @@ spec:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
-            - matchExpressions:
-                - key: ceph-osd
-                  operator: Exists
+          - matchExpressions:
+            - key: ceph-osd
+              operator: Exists

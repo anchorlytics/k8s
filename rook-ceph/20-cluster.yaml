@@ -13,9 +13,17 @@ spec:
     enabled: true
   mgr:
     modules:
-      - name: pg_autoscaler
-        enabled: true
+    - name: pg_autoscaler
+      enabled: true
   dataDirHostPath: /var/lib/rook
+  placement:
+    osd:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: ceph-osd
+              operator: Exists
   driveGroups:
   - name: spanish-hdd
     spec:
@@ -27,8 +35,13 @@ spec:
         size: '1TB:'
     placement:
       nodeAffinity:
-        nodeSelector:
-          kubernetes.io/hostname: spanish.home.seanho.com
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+              - spanish.home.seanho.com
   - name: spanish-nvme
     spec:
       encrypted: true
@@ -37,8 +50,13 @@ spec:
         size: '1TB:'
     placement:
       nodeAffinity:
-        nodeSelector:
-          kubernetes.io/hostname: spanish.home.seanho.com
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+              - spanish.home.seanho.com
   - name: jericho-hdd
     spec:
       encrypted: true
@@ -49,8 +67,13 @@ spec:
         model: 'ADATA SX8200NP'
     placement:
       nodeAffinity:
-        nodeSelector:
-          kubernetes.io/hostname: jericho.home.seanho.com
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+              - jericho.home.seanho.com
   - name: jericho-nvme
     spec:
       encrypted: true
@@ -59,5 +82,10 @@ spec:
         model: 'SAMSUNG MZFLV512HCJH-000MV'
     placement:
       nodeAffinity:
-        nodeSelector:
-          kubernetes.io/hostname: jericho.home.seanho.com
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+              - jericho.home.seanho.com
