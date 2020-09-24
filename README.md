@@ -1,8 +1,9 @@
 # k8s
-Config for Kubernetes container orchestration
+Config for Kubernetes container orchestration.
 
-Clone to `/var/lib/rancher/k3s/server/manifests/` for auto-deployment under k3s.
-See ho-ansible/k3s for installing k3s.
+Apply to running k3s cluster via `kubectl apply -f`.
+
+See [ho-ansible/k3s](https://github.com/ho-ansible/k3s) for installing k3s.
 
 These are generally going to be Helm chart resource definitions of the following type:
 ```
@@ -15,7 +16,3 @@ See the
 for more info on this CRD.
 
 Secrets referenced in these charts are defined in a separate private repo.
-
-Remember to
-[delete all resources](https://github.com/rancher/k3s/issues/187)
-before applying a modified manifest.
