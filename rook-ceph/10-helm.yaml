@@ -6,11 +6,12 @@ metadata:
   namespace: kube-system
 spec:
   repo: "https://charts.rook.io/release"
-  chart: rook-ceph:v1.4.3
+  chart: rook-ceph
   targetNamespace: rook-ceph
+  pspEnable: false
   valuesContent: |-
     currentNamespaceOnly: true
     nodeSelector:
       ceph: true
     discover:
-      nodeAffinity: ceph-osd=
+      nodeAffinity: "ceph-osd="
