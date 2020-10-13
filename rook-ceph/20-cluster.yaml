@@ -41,7 +41,7 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-              - spanish.home.seanho.com
+              - spanish
   - name: spanish-nvme
     spec:
       encrypted: true
@@ -56,7 +56,7 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-              - spanish.home.seanho.com
+              - spanish
   - name: jericho-hdd
     spec:
       encrypted: true
@@ -73,7 +73,7 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-              - jericho.home.seanho.com
+              - jericho
   - name: jericho-nvme
     spec:
       encrypted: true
@@ -88,4 +88,4 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-              - jericho.home.seanho.com
+              - jericho
