@@ -11,8 +11,9 @@ metadata:
   name: unifi
   namespace: kube-system
 spec:
-  chart: stable/unifi
-  version: 0.10.0
+  repo: "https://k8s-at-home.com/charts"
+  chart: unifi
+  version: 1.0.0
   targetNamespace: unifi
   valuesContent: |-
     image:
