@@ -32,7 +32,7 @@ spec:
         rotational: 1
       db_devices:
         rotational: 0
-        size: '1TB:'
+        size: '1T:'
     placement:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -47,7 +47,7 @@ spec:
       encrypted: true
       data_devices:
         rotational: 0
-        size: '1TB:'
+        size: '1T:'
     placement:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -63,7 +63,6 @@ spec:
       data_devices:
         rotational: 1
       db_devices:
-        rotational: 0
         model: 'ADATA SX8200NP'
     placement:
       nodeAffinity:
@@ -78,7 +77,6 @@ spec:
     spec:
       encrypted: true
       data_devices:
-        rotational: 0
         model: 'SAMSUNG MZFLV512HCJH-000MV'
     placement:
       nodeAffinity:
