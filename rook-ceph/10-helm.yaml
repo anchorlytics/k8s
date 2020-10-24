@@ -11,7 +11,5 @@ spec:
   pspEnable: false
   valuesContent: |-
     currentNamespaceOnly: true
-    nodeSelector:
-      ceph: true
     discover:
-      nodeAffinity: "ceph-osd="
+      nodeAffinity: "ceph-osd=yes"
