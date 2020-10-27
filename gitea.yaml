@@ -13,22 +13,23 @@ metadata:
 spec:
   repo: "https://dl.gitea.io/charts/"
   chart: gitea
-  version: 1.4.4
+  version: 2.0.1
   targetNamespace: gitea
   valuesContent: |-
     gitea:
       config:
         APP_NAME: "Anchorlytics Code"
+      cache:
+        builtIn:
+          enabled: true
     ingress:
       enabled: true
       hosts:
-        - git.home.seanho.com
+      - git.home.seanho.com
       tls:
-        - secretName: gitea-tls
-          hosts:
-            - git.home.seanho.com
+      - secretName: gitea-tls
+        hosts:
+        - git.home.seanho.com
       annotations:
         cert-manager.io/cluster-issuer: le-prod
-    persistence:
-      existingClaim: gitea-gitea
 
