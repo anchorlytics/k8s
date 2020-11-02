@@ -11,10 +11,6 @@ spec:
     ssl: false
   monitoring:
     enabled: true
-  mgr:
-    modules:
-    - name: pg_autoscaler
-      enabled: true
   dataDirHostPath: /var/lib/rook
   placement:
     osd:
