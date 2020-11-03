@@ -7,18 +7,17 @@ spec:
   metadataPool:
     failureDomain: host
     replicated:
-      size: 3
-    parameters:
-      min_size: 2
-    deviceClass: nvme
-  dataPool:
-    failureDomain: host
-    replicated:
       size: 2
     parameters:
       min_size: 1
+    deviceClass: nvme
+  dataPool:
+    failureDomain: osd
+    erasureCoded:
+      dataChunks: 6
+      codingChunks: 2
     deviceClass: hdd
   gateway:
     type: s3
     port: 80
-    instances: 3
+    instances: 2
