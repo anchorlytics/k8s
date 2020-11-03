@@ -32,7 +32,7 @@ spec:
         rotational: 1
       db_devices:
         rotational: 0
-        size: '1T:'
+        model: 'SAMSUNG MZFLV512HCJH-000MV'
     placement:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -47,7 +47,7 @@ spec:
       encrypted: true
       data_devices:
         rotational: 0
-        size: '1T:'
+        model: 'SDLC2CLR-019T-3NA1'
     placement:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -63,7 +63,7 @@ spec:
       data_devices:
         rotational: 1
       db_devices:
-        model: 'ADATA SX8200NP'
+        model: 'SAMSUNG MZFLV512HCJH-000MV'
     placement:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -77,7 +77,7 @@ spec:
     spec:
       encrypted: true
       data_devices:
-        model: 'SAMSUNG MZFLV512HCJH-000MV'
+        model: 'ADATA SX8200NP'
     placement:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
