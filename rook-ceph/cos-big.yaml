@@ -12,10 +12,11 @@ spec:
       min_size: 1
     deviceClass: nvme
   dataPool:
-    failureDomain: osd
-    erasureCoded:
-      dataChunks: 6
-      codingChunks: 2
+    failureDomain: host
+    replicated:
+      size: 2
+    parameters:
+      min_size: 1
     deviceClass: hdd
   gateway:
     type: s3

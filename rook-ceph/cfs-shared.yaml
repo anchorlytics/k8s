@@ -7,12 +7,12 @@ spec:
   metadataPool:
     failureDomain: host
     replicated:
-      size: 3
+      size: 2
     deviceClass: nvme
   dataPools:
     - failureDomain: host
       replicated:
-        size: 3
+        size: 2
       deviceClass: nvme
   preservePoolsOnDelete: true
   metadataServer:
