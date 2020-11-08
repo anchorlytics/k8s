@@ -21,65 +21,16 @@ spec:
             - key: ceph-osd
               operator: Exists
   driveGroups:
-  - name: spanish-hdd
+  - name: hdd
     spec:
       encrypted: true
       data_devices:
         rotational: 1
       db_devices:
         rotational: 0
-        model: 'SAMSUNG MZFLV512HCJH-000MV'
-    placement:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
-              values:
-              - spanish
-  - name: spanish-nvme
+        size: '400G:450G'
+  - name: nvme
     spec:
       encrypted: true
       data_devices:
         rotational: 0
-        model: 'SDLC2CLR-019T-3NA1'
-    placement:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
-              values:
-              - spanish
-  - name: jericho-hdd
-    spec:
-      encrypted: true
-      data_devices:
-        rotational: 1
-      db_devices:
-        model: 'SAMSUNG MZFLV512HCJH-000MV'
-    placement:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
-              values:
-              - jericho
-  - name: jericho-nvme
-    spec:
-      encrypted: true
-      data_devices:
-        model: 'ADATA SX8200NP'
-    placement:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
-              values:
-              - jericho
