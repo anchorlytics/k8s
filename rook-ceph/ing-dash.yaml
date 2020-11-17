@@ -5,7 +5,7 @@ metadata:
   name: rook-ceph-mgr-dashboard
   namespace: rook-ceph
   annotations:
-    cert-manager.io/cluster-issuer: le-staging
+    cert-manager.io/cluster-issuer: le-prod
 spec:
   tls:
   - hosts:
