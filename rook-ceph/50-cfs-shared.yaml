@@ -10,10 +10,10 @@ spec:
       size: 2
     deviceClass: nvme
   dataPools:
-    - failureDomain: host
-      replicated:
-        size: 2
-      deviceClass: nvme
+  - failureDomain: host
+    replicated:
+      size: 2
+    deviceClass: nvme
   preservePoolsOnDelete: true
   metadataServer:
     activeCount: 1

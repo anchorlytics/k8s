@@ -28,9 +28,10 @@ spec:
         rotational: 1
       db_devices:
         rotational: 0
-        size: '400G:450G'
+        size: '400G:500G'
   - name: nvme
     spec:
       encrypted: true
       data_devices:
         rotational: 0
+        size: '900G:'
