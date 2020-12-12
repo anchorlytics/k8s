@@ -18,8 +18,10 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: ceph-osd
-              operator: Exists
+            - key: ceph-role
+              operator: In
+              values:
+              - osd
   driveGroups:
   - name: hdd
     spec:

@@ -12,6 +12,4 @@ spec:
   valuesContent: |-
     currentNamespaceOnly: true
     nodeSelector:
-      ceph: yes
-    discover:
-      nodeAffinity: "ceph-osd=yes"
+      role: ceph
