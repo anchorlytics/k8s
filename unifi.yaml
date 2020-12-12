@@ -29,9 +29,6 @@ spec:
             - unifi.home.seanho.com
       annotations:
         cert-manager.io/cluster-issuer: le-prod
-    customCert:
-      enabled: true
-      certSecret: unifi-tls
     controllerService:
       type: LoadBalancer
       loadBalancerIP: 10.90.3.97
