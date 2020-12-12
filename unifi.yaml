@@ -31,7 +31,6 @@ spec:
         cert-manager.io/cluster-issuer: le-prod
     customCert:
       enabled: true
-      isChain: true
       certSecret: unifi-tls
     controllerService:
       type: LoadBalancer
