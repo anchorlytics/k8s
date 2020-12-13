@@ -1,0 +1,37 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: home-assistant
+
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: home-assistant
+  namespace: kube-system
+spec:
+  repo: "https://k8s-at-home.com/charts"
+  chart: home-assistant
+  version: 4.0.0
+  targetNamespace: home-assistant
+  valuesContent: |-
+    image:
+      tag: stable
+    ingress:
+      enabled: true
+      hosts:
+      - ha.home.seanho.com
+      tls:
+      - secretName: ha-tls
+        hosts:
+        - ha.home.seanho.com
+      annotations:
+        cert-manager.io/cluster-issuer: le-prod
+    zwave:
+      enabled: true
+      device: ttyACM0
+    postgresql:
+      enabled: true
+    nodeSelector:
+      device: zwave
