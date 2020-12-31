@@ -4,7 +4,8 @@ metadata:
   name: traefik
   namespace: kube-system
 spec:
-  chart: stable/traefik
+  repo: "https://charts.helm.sh/stable"
+  chart: traefik
   version: 1.87.2
   valuesContent: |-
     serviceType: LoadBalancer
