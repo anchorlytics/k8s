@@ -22,11 +22,11 @@ spec:
     ingress:
       enabled: true
       hosts:
-        - unifi.home.seanho.com
+      - unifi.home.seanho.com
       tls:
-        - secretName: unifi-tls
-          hosts:
-            - unifi.home.seanho.com
+      - secretName: unifi-tls
+        hosts:
+        - unifi.home.seanho.com
     controllerService:
       type: LoadBalancer
       loadBalancerIP: 10.90.3.97
