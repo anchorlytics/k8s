@@ -12,7 +12,7 @@ spec:
   valuesContent: |-
     installCRDs: true
     ingressShim:
-      defaultIssuerName: le-staging
+      defaultIssuerName: le-prod
       defaultIssuerKind: ClusterIssuer
     extraArgs:
       - "--dns01-recursive-nameservers-only"
