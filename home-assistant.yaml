@@ -16,22 +16,41 @@ spec:
   version: 5.4.4
   targetNamespace: home-assistant
   valuesContent: |-
-    image:
-      tag: stable
     ingress:
       enabled: true
       hosts:
-      - ha.home.seanho.com
+      - host: ha.home.seanho.com
+        paths:
+        - path: /
       tls:
       - secretName: ha-tls
         hosts:
         - ha.home.seanho.com
-      annotations:
-        cert-manager.io/cluster-issuer: le-prod
-    zwave:
-      enabled: true
-      device: ttyACM0
+    persistence:
+      config:
+        enabled: true
     postgresql:
       enabled: true
-    nodeSelector:
-      device: zwave
+      persistence:
+        enabled: true
+    prometheus:
+      serviceMonitor:
+        enabled: false
+    securityContext:
+      privileged: true
+    additionalVolumes:
+    - name: zwave-usb
+      hostPath:
+        path: /dev/ttyACM0
+    additionalVolumeMounts:
+    - name: zwave-usb
+      mountPath: /dev/ttyACM0
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: device
+              operator: In
+              values:
+              - zwave
