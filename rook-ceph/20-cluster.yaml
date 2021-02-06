@@ -10,7 +10,9 @@ spec:
     enabled: true
     ssl: false
   monitoring:
-    enabled: true
+    enabled: false
+  crashCollector:
+    disable: true
   dataDirHostPath: /var/lib/rook
   placement:
     osd:
