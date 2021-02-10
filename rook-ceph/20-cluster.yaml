@@ -32,7 +32,7 @@ spec:
         rotational: 1
       db_devices:
         rotational: 0
-        size: '400G:600G'
+        size: '300G:600G'
   - name: nvme
     spec:
       encrypted: true
