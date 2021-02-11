@@ -1,0 +1,138 @@
+# kubectl exec -n rook-ceph osd-prepare -- /rook/rook ceph osd provision --data-device-filter '^sd[fgh]' --metadata-device nvme2n1 --drive-groups ""
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: rook-ceph
+  name: osd-prepare
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: jericho
+  initContainers:
+  - name: copy-bins
+    args:
+    - copy-binaries
+    - --copy-to-dir
+    - /rook
+    image: rook/ceph:v1.5.6
+    volumeMounts:
+    - name: rook-binaries
+      mountPath: /rook
+  containers:
+  - name: toolbox
+    image: ceph/ceph:v15.2.8
+    command: ["sleep"]
+    args:
+    - "600"
+    env:
+    - name: ROOK_NODE_NAME
+      value: jericho
+    - name: ROOK_CLUSTER_ID
+      value: fba12ab0-a9d8-49bc-b050-19f62480bdc6
+    - name: ROOK_PRIVATE_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    - name: ROOK_PUBLIC_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    - name: POD_NAMESPACE
+      value: rook-ceph
+    - name: ROOK_MON_ENDPOINTS
+      valueFrom:
+        configMapKeyRef:
+          key: data
+          name: rook-ceph-mon-endpoints
+    - name: ROOK_MON_SECRET
+      valueFrom:
+        secretKeyRef:
+          key: mon-secret
+          name: rook-ceph-mon
+    - name: ROOK_CEPH_USERNAME
+      valueFrom:
+        secretKeyRef:
+          key: ceph-username
+          name: rook-ceph-mon
+    - name: ROOK_CEPH_SECRET
+      valueFrom:
+        secretKeyRef:
+          key: ceph-secret
+          name: rook-ceph-mon
+    - name: ROOK_CONFIG_DIR
+      value: /var/lib/rook
+    - name: ROOK_CEPH_CONFIG_OVERRIDE
+      value: /etc/rook/config/override.conf
+    - name: ROOK_FSID
+      valueFrom:
+        secretKeyRef:
+          key: fsid
+          name: rook-ceph-mon
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ROOK_CRUSHMAP_ROOT
+      value: default
+    - name: ROOK_CRUSHMAP_HOSTNAME
+      value: jericho
+    - name: CEPH_VOLUME_DEBUG
+      value: "1"
+    - name: CEPH_VOLUME_SKIP_RESTORECON
+      value: "1"
+    - name: DM_DISABLE_UDEV
+      value: "1"
+    - name: ROOK_LOG_LEVEL
+      value: DEBUG
+    - name: ROOK_DRIVE_GROUPS
+      value: '{"hdd":"{\"data_devices\":{\"rotational\":1},\"db_devices\":{\"rotational\":0,\"size\":\"400G:600G\"},\"encrypted\":true,\"placement\":{\"host_pattern\":\"*\"},\"service_id\":\"hdd\"}","nvme":"{\"data_devices\":{\"rotational\":0,\"size\":\"600G:\"},\"encrypted\":true,\"placement\":{\"host_pattern\":\"*\"},\"service_id\":\"nvme\"}"}'
+    - name: ROOK_CEPH_VERSION
+      value: ceph version 15.2.8-0 octopus
+    - name: ROOK_OSD_CRUSH_DEVICE_CLASS
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - name: rook-data
+      mountPath: /var/lib/rook
+    - name: ceph-conf-emptydir
+      mountPath: /etc/ceph
+    - name: rook-ceph-log
+      mountPath: /var/log/ceph
+    - name: rook-ceph-crash
+      mountPath: /var/lib/ceph/crash
+    - name: devices
+      mountPath: /dev
+    - name: udev
+      mountPath: /run/udev
+    - name: rook-binaries
+      mountPath: /rook
+    - name: rootfs
+      mountPath: /rootfs
+  serviceAccount: rook-ceph-osd
+  serviceAccountName: rook-ceph-osd
+  volumes:
+  - name: rook-data
+    hostPath:
+      path: /var/lib/rook
+  - name: ceph-conf-emptydir
+    emptyDir: {}
+  - name: rook-ceph-log
+    hostPath:
+      path: /var/lib/rook/rook-ceph/log
+  - name: rook-ceph-crash
+    hostPath:
+      path: /var/lib/rook/rook-ceph/crash
+  - name: rook-binaries
+    emptyDir: {}
+  - name: devices
+    hostPath:
+      path: /dev
+  - name: udev
+    hostPath:
+      path: /run/udev
+  - name: rootfs
+    hostPath:
+      path: /
