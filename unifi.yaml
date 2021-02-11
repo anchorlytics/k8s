@@ -42,3 +42,28 @@ spec:
       loadBalancerIP: 10.90.3.97
       annotations:
         metallb.universe.tf/allow-shared-ip: unifi
+
+---
+# replicated from chart, to use proper apiVersion
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: unifi
+  namespace: unifi
+spec:
+  rules:
+  - host: unifi.home.seanho.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: unifi-gui
+            port:
+              name: https-gui
+  tls:
+  - hosts:
+    - unifi.home.seanho.com
+    secretName: unifi-tls
+
