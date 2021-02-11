@@ -8,6 +8,6 @@ spec:
   replicated:
     size: 2
   parameters:
-    min_size: 1
-  deviceClass: nvme
+    min_size: "1"
+  deviceClass: ssd
 

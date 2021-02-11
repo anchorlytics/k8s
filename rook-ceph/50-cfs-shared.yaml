@@ -8,12 +8,12 @@ spec:
     failureDomain: host
     replicated:
       size: 2
-    deviceClass: nvme
+    deviceClass: ssd
   dataPools:
   - failureDomain: host
     replicated:
       size: 2
-    deviceClass: nvme
+    deviceClass: ssd
   preservePoolsOnDelete: true
   metadataServer:
     activeCount: 1
