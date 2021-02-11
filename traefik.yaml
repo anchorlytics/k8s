@@ -15,9 +15,9 @@ spec:
       domain: ingress.home.seanho.com
       ingress:
         tls:
-          - hosts:
-            - ingress.home.seanho.com
-            secretName: traefik-tls
+        - hosts:
+          - ingress.home.seanho.com
+          secretName: traefik-tls
     ssl:
       enabled: true
       enforced: true
