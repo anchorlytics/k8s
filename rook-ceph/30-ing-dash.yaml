@@ -19,5 +19,4 @@ spec:
   tls:
   - hosts:
     - ceph.home.seanho.com
-    secretName: rook-ceph-mgr-dashboard-tls
-
+    secretName: rook-dashboard-tls
