@@ -25,7 +25,13 @@ spec:
               values:
               - osd
   driveGroups:
-  - name: hdd
+  - name: nvme
+    spec:
+      encrypted: true
+      data_devices:
+        rotational: 0
+        size: '600G:'
+  - name: hdd-1
     spec:
       encrypted: true
       data_devices:
@@ -33,9 +39,30 @@ spec:
       db_devices:
         rotational: 0
         size: '300G:600G'
-  - name: nvme
+    placement:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: NotIn
+              values:
+              - jericho
+  - name: hdd-2
     spec:
       encrypted: true
       data_devices:
+        rotational: 1
+        size: '3T:'
+      db_devices:
         rotational: 0
-        size: '600G:'
+        size: '300G:600G'
+    placement:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+              - jericho
