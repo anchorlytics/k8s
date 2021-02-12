@@ -6,7 +6,7 @@ metadata:
 spec:
   repo: "https://charts.bitnami.com/bitnami"
   chart: metallb
-  version: 2.0.3
+  version: 2.3.0
   valuesContent: |-
     configInline:
       address-pools:
