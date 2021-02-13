@@ -13,7 +13,7 @@ metadata:
 spec:
   repo: "https://dl.gitea.io/charts/"
   chart: gitea
-  version: 2.1.4
+  version: 2.1.11
   targetNamespace: gitea
   valuesContent: |-
     gitea:
@@ -32,4 +32,3 @@ spec:
         - git.home.seanho.com
       annotations:
         cert-manager.io/cluster-issuer: le-staging
-
