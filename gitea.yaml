@@ -13,7 +13,7 @@ metadata:
 spec:
   repo: "https://dl.gitea.io/charts/"
   chart: gitea
-  version: 2.1.4
+  version: 2.1.11
   targetNamespace: gitea
   valuesContent: |-
     gitea:
@@ -22,6 +22,12 @@ spec:
       cache:
         builtIn:
           enabled: true
+    persistence:
+      enabled: true
+      size: 20Gi
+    postgresql:
+      persistence:
+        enabled: true
     ingress:
       enabled: true
       hosts:
@@ -30,6 +36,26 @@ spec:
       - secretName: gitea-tls
         hosts:
         - git.home.seanho.com
-      annotations:
-        cert-manager.io/cluster-issuer: le-staging
+    metrics:
+      enabled: false
 
+---
+# override svc to unset ClusterIP
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/instance: gitea
+    app.kubernetes.io/name: gitea
+  name: gitea-http
+  namespace: gitea
+spec:
+  selector:
+    app.kubernetes.io/instance: gitea
+    app.kubernetes.io/name: gitea
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
