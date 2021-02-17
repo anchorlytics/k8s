@@ -4,6 +4,8 @@ kind: Ingress
 metadata:
   name: rook-ceph-mgr-dashboard
   namespace: rook-ceph
+  annotations:
+    cert-manager.io/cluster-issuer: le-prod
 spec:
   rules:
   - host: ceph.home.seanho.com
