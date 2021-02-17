@@ -51,6 +51,7 @@ metadata:
   name: unifi
   namespace: unifi
   annotations:
+    cert-manager.io/cluster-issuer: le-prod
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   rules:
