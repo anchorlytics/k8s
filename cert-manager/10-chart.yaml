@@ -11,9 +11,13 @@ spec:
   targetNamespace: cert-manager
   valuesContent: |-
     installCRDs: true
+    prometheus:
+      enabled: false
+      servicemonitor:
+        enabled: false
     ingressShim:
       defaultIssuerName: le-prod
       defaultIssuerKind: ClusterIssuer
     extraArgs:
-      - "--dns01-recursive-nameservers-only"
-      - "--dns01-recursive-nameservers=1.1.1.1:53"
+    - "--dns01-recursive-nameservers-only"
+    - "--dns01-recursive-nameservers=1.1.1.1:53"
