@@ -36,6 +36,8 @@ spec:
       - secretName: gitea-tls
         hosts:
         - git.home.seanho.com
+      annotations:
+        cert-manager.io/cluster-issuer: le-prod
     metrics:
       enabled: false
 
