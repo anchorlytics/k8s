@@ -1,0 +1,21 @@
+# override svc to unset ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/instance: gitea
+    app.kubernetes.io/name: gitea
+  name: gitea-http
+  namespace: gitea
+spec:
+  selector:
+    app.kubernetes.io/instance: gitea
+    app.kubernetes.io/name: gitea
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+
