@@ -29,10 +29,6 @@ spec:
         - ha.home.seanho.com
       annotations:
         cert-manager.io/cluster-issuer: le-prod
-    dnsConfig:
-      options:
-      - name: ndots
-        value: "2"
     persistence:
       config:
         enabled: true
