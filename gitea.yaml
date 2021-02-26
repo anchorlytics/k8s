@@ -35,7 +35,7 @@ spec:
       tls:
       - secretName: gitea-tls
         hosts:
-        - git.home.seanho.com
+        - code.anchorlytics.com
       annotations:
         cert-manager.io/cluster-issuer: le-prod
     metrics:
