@@ -1,19 +1,24 @@
 # k8s
-Config for Kubernetes container orchestration.
+Config for **Kubernetes** container orchestration.
+Generally specific to **Anchorlytics** compute infrastructure.
 
-Apply to running k3s cluster via `kubectl apply -f`.
+Most manifests use the [Helm chart CRD](https://rancher.com/docs/k3s/latest/en/helm/).
 
-See [ho-ansible/k3s](https://github.com/ho-ansible/k3s) for installing k3s.
+**Secrets** referenced in these charts are defined in a separate private repo.
 
-These are generally going to be Helm chart resource definitions of the following type:
+## Directory Structure
++ `int/`: manifests for **internal** k8s cluster
++ `ext/`: manifests for **external** k8s cluster
++ `common/`: manifests applicable to **both**
++ `ns/`: manifests to create **namespaces**
+
+## Usage
++ Install **k3s** on cluster nodes with [ho-ansible/k3s](https://github.com/ho-ansible/k3s).
++ Create **namespaces**:
 ```
-apiVersion: helm.cattle.io/v1
-kind: HelmChart
+kubectl apply -f ns/
 ```
-Values for the Helm chart are in the `valuesContent` key.
-See the
-[k3s documentation](https://rancher.com/docs/k3s/latest/en/helm/)
-for more info on this CRD.
-
-Secrets referenced in these charts are defined in a separate private repo.
-
++ Apply manifests for desired **cluster**:
+```
+kubectl apply -f int/
+```
