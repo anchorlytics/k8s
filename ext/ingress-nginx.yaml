@@ -11,11 +11,12 @@ spec:
   version: 3.23.0
   targetNamespace: ingress-nginx
   valuesContent: |-
+    controller:
+      kind: DaemonSet
+      nodeSelector:
+        role: ingress
     service:
-      loadBalancerIP: 10.90.4.96
-    metrics:
-      enabled: false
-      serviceMonitor:
-        enabled: false
-      prometheusRule:
-        enabled: false
+      type: NodePort
+      nodePorts:
+        http: 2080
+        https: 2443
