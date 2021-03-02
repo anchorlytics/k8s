@@ -12,6 +12,7 @@ spec:
   valuesContent: |-
     nextcloud:
       host: cloud.home.seanho.com
+      datadir: /var/www/html/data
       persistence:
         subPath: 
     ingress:
