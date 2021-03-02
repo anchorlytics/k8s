@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shinobi
+  namespace: shinobi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: shinobi
+      app.kubernetes.io/name: shinobi
+  template:
+    metadata:
+    spec:
+      containers:
+      - name: shinobi
+        image: "shinobisystems/shinobi:latest"
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: autoload
+          mountPath: /home/Shinobi/libs/customAutoLoad
+        - name: db
+          mountPath: /var/lib/mysql
+        - name: videos
+          mountPath: /home/Shinobi/videos
+        - name: plugins
+          mountPath: /home/Shinobi/plugins
+        - name: streams
+          mountPath: /dev/shm/streams
+      volumes:
+      - name: config
+        configMap:
+          name: config
+      - name: videos
+        persistentVolumeClaim:
+          claimName: videos
+      - name: streams
+        emptyDir:
+          medium: Memory
+
