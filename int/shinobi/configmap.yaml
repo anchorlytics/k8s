@@ -5,3 +5,12 @@ metadata:
   name: config
   namespace: shinobi
 data:
+  conf.json: >-
+    {
+      "pluginkeys": {}
+    }
+  super.json: >-
+    [{
+      "mail": "shinobi@seanho.com",
+      "pass": "samplepassword"
+    }]

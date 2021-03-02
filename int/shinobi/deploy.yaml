@@ -37,9 +37,18 @@ spec:
       - name: config
         configMap:
           name: config
+      - name: autoload
+        persistentVolumeClaim:
+          claimName: autoload
+      - name: db
+        persistentVolumeClaim:
+          claimName: db
       - name: videos
         persistentVolumeClaim:
           claimName: videos
+      - name: plugins
+        persistentVolumeClaim:
+          claimName: plugins
       - name: streams
         emptyDir:
           medium: Memory
