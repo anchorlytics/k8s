@@ -4,6 +4,6 @@ metadata:
   name: photo
   namespace: nextcloud
 spec:
-  bucketName: photo
+  generateBucketName: photo
   storageClassName: ceph-big
 

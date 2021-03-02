@@ -11,11 +11,12 @@ spec:
     deviceClass: ssd
   dataPools:
   - failureDomain: host
-    replicated:
-      size: 2
-    deviceClass: ssd
+    erasureCoded:
+      dataChunks: 2
+      codingChunks: 1
+    deviceClass: hdd
   preservePoolsOnDelete: true
   metadataServer:
-    activeCount: 1
+    activeCount: 3
     activeStandby: true
 

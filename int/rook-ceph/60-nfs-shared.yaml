@@ -5,7 +5,7 @@ metadata:
   namespace: rook-ceph
 spec:
   rados:
-    pool: shared
-    namespace: ganesha
+    pool: shared-metadata
+    namespace: nfs
   server:
     active: 2
