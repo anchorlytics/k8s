@@ -12,6 +12,5 @@ spec:
     protocol: TCP
     targetPort: http
   selector:
-    app.kubernetes.io/instance: shinobi
-    app.kubernetes.io/name: shinobi
+    app: shinobi
 

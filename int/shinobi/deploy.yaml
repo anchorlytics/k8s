@@ -8,10 +8,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/instance: shinobi
-      app.kubernetes.io/name: shinobi
+      app: shinobi
   template:
     metadata:
+      labels:
+        app: shinobi
     spec:
       containers:
       - name: shinobi
