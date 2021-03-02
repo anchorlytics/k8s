@@ -5,10 +5,10 @@ metadata:
   name: videos
   namespace: shinobi
 spec:
-  storageClassName: ceph-big
+  storageClassName: ceph-bulk
   volumeMode: Filesystem
   accessModes:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 4TB
+      storage: 4T
