@@ -26,11 +26,11 @@ spec:
     ingress:
       enabled: true
       hosts:
-      - code.anchorlytics.com
+      - code.home.seanho.com
       tls:
       - secretName: gitea-tls
         hosts:
-        - code.anchorlytics.com
+        - code.home.seanho.com
       annotations:
         cert-manager.io/cluster-issuer: le-prod
     metrics:
