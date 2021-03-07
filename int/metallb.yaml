@@ -22,3 +22,13 @@ spec:
           protocol: layer2
           addresses:
             - 10.90.8.96/27
+    prometheusRule:
+      enabled: true
+    controller:
+      prometheus:
+        serviceMonitor:
+          enabled: true
+    speaker:
+      prometheus:
+        serviceMonitor:
+          enabled: true
