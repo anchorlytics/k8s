@@ -14,8 +14,14 @@ spec:
     gitea:
       config:
         APP_NAME: "Anchorlytics Code"
+        server:
+          PPROF_ENABLED: true
       cache:
         builtIn:
+          enabled: true
+      metrics:
+        enabled: true
+        serviceMonitor:
           enabled: true
     persistence:
       enabled: true
@@ -33,5 +39,3 @@ spec:
         - code.home.seanho.com
       annotations:
         cert-manager.io/cluster-issuer: le-prod
-    metrics:
-      enabled: false
