@@ -21,8 +21,6 @@ spec:
           enabled: true
       metrics:
         enabled: true
-        serviceMonitor:
-          enabled: true
     persistence:
       enabled: true
       size: 20Gi
