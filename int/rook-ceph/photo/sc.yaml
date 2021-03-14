@@ -1,9 +1,9 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: ceph-big
+  name: photo
 provisioner: rook-ceph.ceph.rook.io/bucket
 parameters:
-  objectStoreName: big
+  objectStoreName: photo
   objectStoreNamespace: rook-ceph
 

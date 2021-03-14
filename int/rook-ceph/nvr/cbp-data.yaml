@@ -1,7 +1,7 @@
 apiVersion: ceph.rook.io/v1
 kind: CephBlockPool
 metadata:
-  name: bulk
+  name: nvr-data
   namespace: rook-ceph
 spec:
   failureDomain: host

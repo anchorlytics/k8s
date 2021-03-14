@@ -1,7 +1,7 @@
 apiVersion: ceph.rook.io/v1
 kind: CephNFS
 metadata:
-  name: nfs
+  name: shared
   namespace: rook-ceph
 spec:
   rados:
