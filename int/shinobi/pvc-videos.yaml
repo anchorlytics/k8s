@@ -5,7 +5,7 @@ metadata:
   name: videos
   namespace: shinobi
 spec:
-  storageClassName: ceph-bulk
+  storageClassName: nvr
   volumeMode: Filesystem
   accessModes:
   - ReadWriteOnce
