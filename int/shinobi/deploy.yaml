@@ -36,8 +36,8 @@ spec:
           mountPath: /dev/shm/streams
       volumes:
       - name: config
-        configMap:
-          name: config
+        persistentVolumeClaim:
+          claimName: config
       - name: autoload
         persistentVolumeClaim:
           claimName: autoload
