@@ -1,0 +1,22 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: shinobi
+  namespace: shinobi
+spec:
+  rules:
+  - host: nvr.home.seanho.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: shinobi
+            port:
+              name: http
+        path: /
+        pathType: Prefix
+  tls:
+  - secretName: shinobi-tls
+    hosts:
+    - nvr.home.seanho.com

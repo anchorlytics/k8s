@@ -1,0 +1,56 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shinobi
+  namespace: shinobi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shinobi
+  template:
+    metadata:
+      labels:
+        app: shinobi
+    spec:
+      containers:
+      - name: shinobi
+        image: "shinobisystems/shinobi:latest"
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: autoload
+          mountPath: /home/Shinobi/libs/customAutoLoad
+        - name: db
+          mountPath: /var/lib/mysql
+        - name: videos
+          mountPath: /home/Shinobi/videos
+        - name: plugins
+          mountPath: /home/Shinobi/plugins
+        - name: streams
+          mountPath: /dev/shm/streams
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: config
+      - name: autoload
+        persistentVolumeClaim:
+          claimName: autoload
+      - name: db
+        persistentVolumeClaim:
+          claimName: db
+      - name: videos
+        persistentVolumeClaim:
+          claimName: videos
+      - name: plugins
+        persistentVolumeClaim:
+          claimName: plugins
+      - name: streams
+        emptyDir:
+          medium: Memory
+
