@@ -4,6 +4,8 @@ kind: Ingress
 metadata:
   name: shinobi
   namespace: shinobi
+  annotations:
+    cert-manager.io/cluster-issuer: le-prod
 spec:
   rules:
   - host: nvr.home.seanho.com
