@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+  namespace: shinobi
+data:
+  conf.json: >-
+    {
+      "pluginkeys": {}
+      "port": 8080,
+      "passwordType": "sha256",
+      "detectorMergePamRegionTriggers": true,
+      "wallClockTimestampAsDefault": true,
+      "addStorage": [{
+        "name": "second",
+        "path": "__DIR__/videos2"
+      }],
+      "db": {
+        "host": "localhost",
+        "user": "majesticflame",
+        "password": "",
+        "database": "ccio",
+        "port": 3306
+      },
+      "mail": {
+        "service": "gmail",
+        "auth": {
+          "user": "your_email@gmail.com",
+          "pass": "your_password_or_app_specific_password"
+        }
+      },
+      "cron": {
+        "key": "ea401315ced3b71c20cae18f3a639"
+      },
+      "pluginKeys": {},
+      "cpuUsageMarker": "CPU",
+      "subscriptionId": "sub_XXXXXXXXXXXX",
+      "thisIsDocker": true,
+      "ssl": {}
+    }
+  super.json: >-
+    [{
+      "mail": "admin@shinobi.video",
+      "pass": "21232f297a57a5a743894a0e4a801fc3"
+    }]
