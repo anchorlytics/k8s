@@ -1,0 +1,25 @@
+
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: kubernetes-dashboard
+  namespace: kube-system
+spec:
+  repo: "https://kubernetes.github.io/dashboard"
+  chart: kubernetes-dashboard
+  version: 4.0.2
+  targetNamespace: kubernetes-dashboard
+  valuesContent: |-
+    nodeSelector:
+      kubernetes.io/hostname: wreck
+    protocolHttp: true
+    service:
+      type: LoadBalancer
+      loadBalancerIP: 10.90.3.99
+      externalPort: 80
+    metricsScraper:
+      enabled: false
+    metrics-server:
+      enabled: false
+
