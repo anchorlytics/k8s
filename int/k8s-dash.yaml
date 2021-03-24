@@ -11,13 +11,13 @@ spec:
   version: 4.0.2
   targetNamespace: kubernetes-dashboard
   valuesContent: |-
+    ingress:
+      enabled: true
+      hosts:
+      - k8s.mgmt.seanho.com
+      tls:
     nodeSelector:
       kubernetes.io/hostname: wreck
-    protocolHttp: true
-    service:
-      type: LoadBalancer
-      loadBalancerIP: 10.90.3.99
-      externalPort: 80
     metricsScraper:
       enabled: false
     metrics-server:
