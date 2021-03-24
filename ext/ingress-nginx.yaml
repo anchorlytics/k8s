@@ -20,3 +20,4 @@ spec:
       nodePorts:
         http: 2080
         https: 2443
+      externalTrafficPolicy: Local
