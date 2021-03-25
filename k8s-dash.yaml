@@ -14,8 +14,13 @@ spec:
     ingress:
       enabled: true
       hosts:
-      - k8s.mgmt.seanho.com
+      - k8s.home.seanho.com
       tls:
+      - secretName: k8s-dash-tls
+        hosts:
+        - k8s.home.seanho.com
+      annotations:
+        cert-manager.io/cluster-issuer: le-prod
     nodeSelector:
       kubernetes.io/hostname: wreck
     metricsScraper:

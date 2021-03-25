@@ -1,24 +1,25 @@
 # k8s
 Config for **Kubernetes** container orchestration.
 Generally specific to **Anchorlytics** compute infrastructure.
+This repository is for the **internal** cluster, accessible via VPN.
 
 Most manifests use the [Helm chart CRD](https://rancher.com/docs/k3s/latest/en/helm/).
 
 **Secrets** referenced in these charts are defined in a separate private repo.
 
-## Directory Structure
-+ `int/`: manifests for **internal** k8s cluster
-+ `ext/`: manifests for **external** k8s cluster
-+ `common/`: manifests applicable to **both**
-+ `ns/`: manifests to create **namespaces**
+## Special Directories
++ `.ns/`: create **namespaces**
++ `.util/`: one-off **utility** pods for troubleshooting
 
 ## Usage
-+ Install **k3s** on cluster nodes with [ho-ansible/k3s](https://github.com/ho-ansible/k3s).
++ Add cluster nodes to ansible **inventory**
++ Install **k3s** on cluster nodes with [ho-ansible/k3s](https://github.com/ho-ansible/k3s)
 + Create **namespaces**:
 ```
-kubectl apply -f ns/
+kubectl apply -f .ns/
 ```
-+ Apply manifests for desired **cluster**:
++ Create desired **resources**: e.g., 
 ```
-kubectl apply -f int/
+kubectl apply -f ingress-nginx.yaml
 ```
+

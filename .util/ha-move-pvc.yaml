@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: move-pvc
+  namespace: home-assistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: home-assistant
+  template:
+    metadata:
+      labels:
+        app: home-assistant
+    spec:
+      containers:
+      - name: toolbox
+        image: busybox
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        - name: config
+          mountPath: /config
+#        - name: db
+#          mountPath: /db
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: home-assistant
+      - name: config
+        persistentVolumeClaim:
+          claimName: home-assistant-config
+#      - name: db
+#        persistentVolumeClaim:
+#          claimName: data-home-assistant-postgresql-0
+
