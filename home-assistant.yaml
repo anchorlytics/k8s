@@ -24,6 +24,7 @@ spec:
         - ha.home.seanho.com
       annotations:
         cert-manager.io/cluster-issuer: le-prod
+        nginx.org/websocket-services: home-assistant
     persistence:
       config:
         enabled: true
