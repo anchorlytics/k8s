@@ -1,0 +1,31 @@
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: samba
+  namespace: kube-system
+spec:
+  repo: "https://k8s-at-home.com/charts"
+  chart: samba
+  version: 3.3.1
+  targetNamespace: samba
+  valuesContent: |-
+    service:
+      type: LoadBalancer
+      loadBalancerIP: 10.90.4.97
+    additionalVolumeMounts:
+      - name: shared
+        mountPath: /shared
+    additionalVolumes:
+      - name: shared
+        persistentVolumeClaim:
+          claimName: shared
+    probes:
+      liveness:
+        enabled: true
+      readiness:
+        enabled: true
+      startup:
+        enabled: true
+    nodeSelector:
+      role: ceph
