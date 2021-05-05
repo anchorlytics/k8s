@@ -6,7 +6,7 @@ metadata:
 spec:
   repo: "https://charts.bitnami.com/bitnami"
   chart: metallb
-  version: 2.3.5
+  version: 2.3.6
   valuesContent: |-
     configInline:
       address-pools:
@@ -24,11 +24,11 @@ spec:
             - 10.90.8.96/27
     prometheusRule:
       enabled: true
-    controller:
-      prometheus:
-        serviceMonitor:
-          enabled: true
-    speaker:
-      prometheus:
-        serviceMonitor:
-          enabled: true
+#    controller:
+#      prometheus:
+#        serviceMonitor:
+#          enabled: true
+#    speaker:
+#      prometheus:
+#        serviceMonitor:
+#          enabled: true
