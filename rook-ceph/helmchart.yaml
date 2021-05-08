@@ -11,6 +11,8 @@ spec:
   targetNamespace: rook-ceph
   pspEnable: false
   valuesContent: |-
+    image:
+      tag: v1.6.2
     currentNamespaceOnly: true
     nodeSelector:
       role: ceph
