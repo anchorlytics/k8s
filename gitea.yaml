@@ -8,7 +8,7 @@ metadata:
 spec:
   repo: "https://dl.gitea.io/charts/"
   chart: gitea
-  version: 2.2.5
+  version: 3.0.0
   targetNamespace: gitea
   valuesContent: |-
     gitea:
