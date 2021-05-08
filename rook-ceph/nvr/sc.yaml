@@ -7,6 +7,7 @@ parameters:
   clusterID: rook-ceph
   pool: pods
   dataPool: nvr-data
+  imageFeatures: layering
 
   csi.storage.k8s.io/fstype: ext4
   csi.storage.k8s.io/provisioner-secret-name: rook-csi-rbd-provisioner
