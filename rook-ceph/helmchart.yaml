@@ -7,7 +7,7 @@ metadata:
 spec:
   repo: "https://charts.rook.io/release"
   chart: rook-ceph
-  version: 1.5.6
+  version: 1.6.2
   targetNamespace: rook-ceph
   pspEnable: false
   valuesContent: |-
