@@ -8,7 +8,7 @@ metadata:
 spec:
   repo: "https://kubernetes.github.io/dashboard"
   chart: kubernetes-dashboard
-  version: 4.0.2
+  version: 4.0.3
   targetNamespace: kubernetes-dashboard
   valuesContent: |-
     ingress:
