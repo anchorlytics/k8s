@@ -44,12 +44,5 @@ spec:
     additionalVolumeMounts:
     - name: zwave-usb
       mountPath: /zwaveusbstick
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: device
-              operator: In
-              values:
-              - zwave
+    nodeSelector:
+      zwave: usb
