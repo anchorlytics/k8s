@@ -8,6 +8,7 @@ provisioner: rook-ceph.rbd.csi.ceph.com
 parameters:
   clusterID: rook-ceph
   pool: pods
+  imageFormat: "2"
   imageFeatures: layering
 
   csi.storage.k8s.io/fstype: ext4
