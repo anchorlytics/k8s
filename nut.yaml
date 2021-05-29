@@ -1,0 +1,24 @@
+
+# https://github.com/k8s-at-home/charts/tree/master/charts/stable/network-ups-tools
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: nut
+  namespace: kube-system
+spec:
+  repo: "https://k8s-at-home.com/charts"
+  chart: network-ups-tools
+  version: 3.4.0
+  targetNamespace: nut
+  valuesContent: |-
+    config:
+      files:
+        ups.conf: |
+          [rack]
+          driver=usbhid-ups
+          port=auto
+    securityContext:
+      privileged: true
+    nodeSelector:
+      ups: usb
