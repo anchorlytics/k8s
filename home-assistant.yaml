@@ -8,23 +8,24 @@ metadata:
 spec:
   repo: "https://k8s-at-home.com/charts"
   chart: home-assistant
-  version: 8.3.1
+  version: 9.2.0
   targetNamespace: home-assistant
   valuesContent: |-
     ingress:
-      enabled: true
-      hosts:
-      - host: ha.home.seanho.com
-        paths:
-        - path: /
-          pathType: Prefix
-      tls:
-      - secretName: ha-tls
+      main:
+        enabled: true
         hosts:
-        - ha.home.seanho.com
-      annotations:
-        cert-manager.io/cluster-issuer: le-prod
-        nginx.org/websocket-services: home-assistant
+        - host: ha.home.seanho.com
+          paths:
+          - path: /
+            pathType: Prefix
+        tls:
+        - secretName: ha-tls
+          hosts:
+          - ha.home.seanho.com
+        annotations:
+          cert-manager.io/cluster-issuer: le-prod
+          nginx.org/websocket-services: home-assistant
     persistence:
       config:
         enabled: true
