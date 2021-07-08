@@ -8,12 +8,15 @@ metadata:
 spec:
   repo: "https://k8s-at-home.com/charts"
   chart: unifi
-  version: 1.3.1
+  version: 2.0.4
   targetNamespace: unifi
   valuesContent: |-
     image:
       tag: 5.6
     timezone: America/Vancouver
+    persistence:
+      enabled: true
+      existingClaim: unifi
     ingress:
       enabled: true
       hosts:
@@ -22,6 +25,9 @@ spec:
       - hosts:
         - unifi.home.seanho.com
         secretName: unifi-tls
+      annotations:
+        cert-manager.io/cluster-issuer: le-prod
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     controllerService:
       type: LoadBalancer
       loadBalancerIP: 10.90.3.97
