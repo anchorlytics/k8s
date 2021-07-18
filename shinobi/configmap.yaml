@@ -1,3 +1,6 @@
+---
+# Superuser credentials below are placeholders; change on login
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
