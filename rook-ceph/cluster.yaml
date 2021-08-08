@@ -5,12 +5,15 @@ metadata:
   namespace: rook-ceph
 spec:
   cephVersion:
-    image: ceph/ceph:v15.2.8
+    image: ceph/ceph:v15.2.13
   dashboard:
     enabled: true
     ssl: false
   monitoring:
     enabled: false
+  mon:
+    count: 3
+    allowMultiplePerNode: false
   crashCollector:
     disable: true
   dataDirHostPath: /var/lib/rook
@@ -24,45 +27,14 @@ spec:
               operator: In
               values:
               - osd
-  driveGroups:
-  - name: nvme
-    spec:
-      encrypted: true
-      data_devices:
-        rotational: 0
-        size: '600G:'
-  - name: hdd-1
-    spec:
-      encrypted: true
-      data_devices:
-        rotational: 1
-      db_devices:
-        rotational: 0
-        size: '300G:600G'
-    placement:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: NotIn
-              values:
-              - jericho
-  - name: hdd-2
-    spec:
-      encrypted: true
-      data_devices:
-        rotational: 1
-        size: '3T:'
-      db_devices:
-        rotational: 0
-        size: '300G:600G'
-    placement:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
-              values:
-              - jericho
+  storage:
+    useAllNodes: false
+    useAllDevices: false
+    config:
+      encryptedDevice: "true"
+#    nodes:
+#    - name: 
+#      devices:
+#      - name:
+#        config:
+#          metadataDevice:
