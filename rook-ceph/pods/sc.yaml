@@ -4,6 +4,10 @@ metadata:
   name: pods
   annotations:
     storageclass.kubernetes.io/is-default-class: "true"
+    meta.helm.sh/release-name: rook-ceph-cluster
+    meta.helm.sh/release-namespace: rook-ceph
+  labels:
+    app.kubernetes.io/managed-by: Helm
 provisioner: rook-ceph.rbd.csi.ceph.com
 allowVolumeExpansion: true
 parameters:

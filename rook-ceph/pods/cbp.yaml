@@ -3,6 +3,11 @@ kind: CephBlockPool
 metadata:
   name: pods
   namespace: rook-ceph
+  annotations:
+    meta.helm.sh/release-name: rook-ceph-cluster
+    meta.helm.sh/release-namespace: rook-ceph
+  labels:
+    app.kubernetes.io/managed-by: Helm
 spec:
   failureDomain: host
   replicated:
