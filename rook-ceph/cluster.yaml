@@ -1,44 +1,103 @@
-apiVersion: ceph.rook.io/v1
-kind: CephCluster
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
 metadata:
-  name: rook-ceph
-  namespace: rook-ceph
-  annotations:
-    meta.helm.sh/release-name: rook-ceph-cluster
-    meta.helm.sh/release-namespace: rook-ceph
-  labels:
-    app.kubernetes.io/managed-by: Helm
+  name: rook-ceph-cluster
+  namespace: kube-system
 spec:
-  cephVersion:
-    image: ceph/ceph:v15.2.13
-  mgr:
-    count: 2
-  dashboard:
-    enabled: true
-    ssl: false
-  monitoring:
-    enabled: false
-  crashCollector:
-    disable: true
-  dataDirHostPath: /var/lib/rook
-  placement:
-    osd:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: ceph-role
-              operator: In
-              values:
-              - osd
-  storage:
-    useAllNodes: true
-    useAllDevices: false
-    config:
-      encryptedDevice: "true"
+  repo: "https://charts.rook.io/release"
+  chart: rook-ceph-cluster
+  version: 1.7.0
+  targetNamespace: rook-ceph
+  valuesContent: |-
+    clusterName: rook-ceph
+    operatorNamespace: rook-ceph
+    toolbox:
+      enabled: true
+    cephClusterSpec:
+      cephVersion:
+        image: ceph/ceph:v15.2.13
+      mgr:
+        count: 2
+      dashboard:
+        enabled: true
+        ssl: false
+      monitoring:
+        enabled: false
+      crashCollector:
+        disable: true
+      dataDirHostPath: /var/lib/rook
+      placement:
+        osd:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: ceph-role
+                  operator: In
+                  values:
+                  - osd
+      storage:
+        useAllNodes: true
+        useAllDevices: false
+        config:
+          encryptedDevice: "true"
+    ingress:
+      dashboard:
+        host:
+          name: ceph.home.seanho.com
+          path: /
+        tls:
+        - hosts:
+          - ceph.home.seanho.com
+          secretName: rook-dashboard-tls
+        annotations:
+          cert-manager.io/cluster-issuer: le-prod
+    cephBlockPools:
+    - name: pods
+      spec:
+        failureDomain: host
+        replicated:
+          size: 2
+        parameters:
+          min_size: "1"
+          compression_mode: passive
+        deviceClass: ssd
+      storageClass:
+        enabled: true
+        name: pods
+        isDefault: true
+        parameters:
+          imageFormat: "2"
+          imageFeatures: layering
+          csi.storage.k8s.io/fstype: ext4
+    - name: nvr-data
+      spec:
+        failureDomain: host
+        erasureCoded:
+          dataChunks: 2
+          codingChunks: 1
+        deviceClass: hdd
+      storageClass:
+        enabled: true
+        name: nvr
+        isDefault: false
+        #reclaimPolicy: Retain
+        parameters:
+          pool: pods
+          dataPool: nvr-data
+          imageFormat: "2"
+          imageFeatures: layering
+          csi.storage.k8s.io/fstype: ext4
+
+          ## cephFileSystems:
+          ## -
+          ## cephObjectStores:
+          ## - 
+
 #    nodes:
 #    - name: 
 #      devices:
 #      - name:
 #        config:
 #          metadataDevice:
+
