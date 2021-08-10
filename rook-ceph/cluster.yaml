@@ -3,17 +3,21 @@ kind: CephCluster
 metadata:
   name: rook-ceph
   namespace: rook-ceph
+  annotations:
+    meta.helm.sh/release-name: rook-ceph-cluster
+    meta.helm.sh/release-namespace: rook-ceph
+  labels:
+    app.kubernetes.io/managed-by: Helm
 spec:
   cephVersion:
     image: ceph/ceph:v15.2.13
+  mgr:
+    count: 2
   dashboard:
     enabled: true
     ssl: false
   monitoring:
     enabled: false
-  mon:
-    count: 3
-    allowMultiplePerNode: false
   crashCollector:
     disable: true
   dataDirHostPath: /var/lib/rook
@@ -28,7 +32,7 @@ spec:
               values:
               - osd
   storage:
-    useAllNodes: false
+    useAllNodes: true
     useAllDevices: false
     config:
       encryptedDevice: "true"
