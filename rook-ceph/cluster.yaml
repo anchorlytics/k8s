@@ -6,7 +6,7 @@ metadata:
 spec:
   repo: "https://charts.rook.io/release"
   chart: rook-ceph-cluster
-  version: 1.7.0
+  version: 1.7.1
   targetNamespace: rook-ceph
   valuesContent: |-
     clusterName: rook-ceph
@@ -15,7 +15,7 @@ spec:
       enabled: true
     cephClusterSpec:
       cephVersion:
-        image: ceph/ceph:v15.2.13
+        image: quay.io/ceph/ceph:v16.2.5
       mgr:
         count: 2
       dashboard:
@@ -37,8 +37,6 @@ spec:
                   values:
                   - osd
       storage:
-        useAllNodes: true
-        useAllDevices: false
         config:
           encryptedDevice: "true"
     ingress:
@@ -70,6 +68,12 @@ spec:
           imageFormat: "2"
           imageFeatures: layering
           csi.storage.k8s.io/fstype: ext4
+          csi.storage.k8s.io/provisioner-secret-name: rook-csi-rbd-provisioner
+          csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
+          csi.storage.k8s.io/controller-expand-secret-name: rook-csi-rbd-provisioner
+          csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
+          csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
+          csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
     - name: nvr-data
       spec:
         failureDomain: host
@@ -81,23 +85,22 @@ spec:
         enabled: true
         name: nvr
         isDefault: false
-        #reclaimPolicy: Retain
+        reclaimPolicy: Retain
         parameters:
           pool: pods
           dataPool: nvr-data
           imageFormat: "2"
           imageFeatures: layering
           csi.storage.k8s.io/fstype: ext4
+          csi.storage.k8s.io/provisioner-secret-name: rook-csi-rbd-provisioner
+          csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
+          csi.storage.k8s.io/controller-expand-secret-name: rook-csi-rbd-provisioner
+          csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
+          csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
+          csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
 
           ## cephFileSystems:
           ## -
           ## cephObjectStores:
           ## - 
-
-#    nodes:
-#    - name: 
-#      devices:
-#      - name:
-#        config:
-#          metadataDevice:
 
