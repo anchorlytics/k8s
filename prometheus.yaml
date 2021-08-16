@@ -1,0 +1,39 @@
+
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: prometheus
+  namespace: kube-system
+spec:
+  repo: "https://prometheus-community.github.io/helm-charts"
+  chart: kube-prometheus-stack
+  version: 16.1.1
+  targetNamespace: prometheus
+  valuesContent: |-
+    grafana:
+      ingress:
+        enabled: true
+        hosts:
+        - grafana.home.seanho.com
+        tls:
+        - secretName: grafana-tls
+          hosts:
+          - grafana.home.seanho.com
+        annotations:
+          cert-manager.io/cluster-issuer: le-staging
+    prometheus:
+      ingress:
+        enabled: true
+        hosts:
+        - prometheus.home.seanho.com
+        paths:
+        - /
+        pathType: Prefix
+        tls:
+        - secretName: prometheus-tls
+          hosts:
+          - prometheus.home.seanho.com
+        annotations:
+          cert-manager.io/cluster-issuer: le-staging
+
