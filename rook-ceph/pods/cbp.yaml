@@ -1,0 +1,14 @@
+apiVersion: ceph.rook.io/v1
+kind: CephBlockPool
+metadata:
+  name: pods
+  namespace: rook-ceph
+spec:
+  failureDomain: host
+  replicated:
+    size: 2
+  parameters:
+    min_size: "1"
+    compression_mode: passive
+  deviceClass: ssd
+
