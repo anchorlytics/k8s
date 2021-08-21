@@ -12,9 +12,9 @@ spec:
   valuesContent: |-
     installCRDs: true
     prometheus:
-      enabled: false
+      enabled: true
       servicemonitor:
-        enabled: false
+        enabled: true
     ingressShim:
       defaultIssuerName: le-prod
       defaultIssuerKind: ClusterIssuer

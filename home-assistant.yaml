@@ -39,7 +39,7 @@ spec:
         enabled: true
     prometheus:
       serviceMonitor:
-        enabled: false
+        enabled: true
     securityContext:
       privileged: true
     nodeSelector:
