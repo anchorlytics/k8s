@@ -53,4 +53,4 @@ spec:
       - name: streams
         emptyDir:
           medium: Memory
-
+          sizeLimit: 2Gi
