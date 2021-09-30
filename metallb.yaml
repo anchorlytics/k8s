@@ -1,3 +1,5 @@
+# https://github.com/bitnami/charts/blob/master/bitnami/metallb/Chart.yaml
+---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
@@ -6,7 +8,7 @@ metadata:
 spec:
   repo: "https://charts.bitnami.com/bitnami"
   chart: metallb
-  version: 2.5.4
+  version: 2.5.5
   valuesContent: |-
     configInline:
       address-pools:
