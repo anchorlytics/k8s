@@ -1,4 +1,4 @@
-
+# https://github.com/k8s-at-home/charts/blob/master/charts/stable/home-assistant/Chart.yaml
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
@@ -8,7 +8,7 @@ metadata:
 spec:
   repo: "https://k8s-at-home.com/charts"
   chart: home-assistant
-  version: 10.1.0
+  version: 11.0.3
   targetNamespace: home-assistant
   valuesContent: |-
     ingress:
