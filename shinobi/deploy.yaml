@@ -1,3 +1,4 @@
+# https://hub.docker.com/r/shinobisystems/shinobi
 ---
 apiVersion: apps/v1
 kind: Deployment
