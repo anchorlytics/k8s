@@ -1,4 +1,5 @@
 # https://github.com/k8s-at-home/charts/blob/master/charts/stable/home-assistant/Chart.yaml
+# https://hub.docker.com/r/homeassistant/home-assistant/tags
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
@@ -8,9 +9,11 @@ metadata:
 spec:
   repo: "https://k8s-at-home.com/charts"
   chart: home-assistant
-  version: 11.2.0
+  version: 11.2.1
   targetNamespace: home-assistant
   valuesContent: |-
+    image:
+      tag: 2021.12.1
     ingress:
       main:
         enabled: true
