@@ -6,7 +6,7 @@ metadata:
   name: shinobi
   namespace: shinobi
   annotations:
-    deployDate: "2021-10-21"
+    deployDate: "2021-12-10"
 spec:
   replicas: 1
   selector:
@@ -37,6 +37,9 @@ spec:
           mountPath: /home/Shinobi/plugins
         - name: streams
           mountPath: /dev/shm/streams
+        resources:
+          requests:
+            cpu: 8
       volumes:
       - name: config
         persistentVolumeClaim:
