@@ -13,7 +13,7 @@ spec:
   targetNamespace: home-assistant
   valuesContent: |-
     image:
-      tag: 2021.12.1
+      tag: 2021.12.4
     ingress:
       main:
         enabled: true
