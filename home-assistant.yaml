@@ -9,11 +9,11 @@ metadata:
 spec:
   repo: "https://k8s-at-home.com/charts"
   chart: home-assistant
-  version: 11.2.1
+  version: 12.0.1
   targetNamespace: home-assistant
   valuesContent: |-
     image:
-      tag: 2021.12.4
+      tag: 2021.12.10
     ingress:
       main:
         enabled: true
@@ -46,4 +46,4 @@ spec:
     securityContext:
       privileged: true
     nodeSelector:
-      zwave: usb
+      ups: usb
