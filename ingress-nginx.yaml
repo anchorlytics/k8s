@@ -16,7 +16,7 @@ spec:
     controller:
       watchIngressWithoutClass: true
     metrics:
-      enabled: false
+      enabled: true
       serviceMonitor:
         enabled: true
       prometheusRule:
