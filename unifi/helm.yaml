@@ -1,4 +1,4 @@
-
+# https://github.com/k8s-at-home/charts/tree/master/charts/stable/unifi
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
@@ -13,34 +13,53 @@ spec:
   valuesContent: |-
     image:
       tag: v5.14.23
-    timezone: America/Vancouver
+    env:
+      TZ: America/Vancouver
     persistence:
-      enabled: true
-      existingClaim: unifi
+      data:
+        enabled: true
+        existingClaim: unifi
+    service:
+      main:
+        ports:
+          stun:
+            enabled: false
+          syslog:
+            enabled: false
+          discovery:
+            enabled: false
+      udp:
+        enabled: true
+        type: LoadBalancer
+        loadBalancerIP: 10.90.3.97
+        annotations:
+          metallb.universe.tf/allow-shared-ip: unifi
+        ports:
+          stun:
+            enabled: true
+            port: 3478
+            protocol: UDP
+          syslog:
+            enabled: true
+            port: 5514
+            protocol: UDP
+          discovery:
+            enabled: true
+            port: 10001
+            protocol: UDP
     ingress:
-      enabled: true
-      hosts:
-      - unifi.home.seanho.com
-      tls:
-      - hosts:
-        - unifi.home.seanho.com
-        secretName: unifi-tls
-      annotations:
-        cert-manager.io/cluster-issuer: le-prod
-        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-    controllerService:
-      type: LoadBalancer
-      loadBalancerIP: 10.90.3.97
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
-    stunService:
-      type: LoadBalancer
-      loadBalancerIP: 10.90.3.97
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
-    discoveryService:
-      type: LoadBalancer
-      loadBalancerIP: 10.90.3.97
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
+      main:
+        enabled: true
+        hosts:
+        - host: unifi.home.seanho.com
+          paths:
+          - path: /
+            pathType: Prefix
+        tls:
+        - hosts:
+          - unifi.home.seanho.com
+          secretName: unifi-tls
+        annotations:
+          cert-manager.io/cluster-issuer: le-prod
+          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 
