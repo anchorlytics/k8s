@@ -8,12 +8,15 @@ metadata:
 spec:
   repo: "https://kubernetes.github.io/ingress-nginx"
   chart: ingress-nginx
-  version: 4.0.13
+  version: 4.0.17
   targetNamespace: ingress-nginx
   valuesContent: |-
     service:
       loadBalancerIP: 10.90.4.96
     controller:
+      kind: DaemonSet
+      nodeSelector:
+        role: ingress
       watchIngressWithoutClass: true
     metrics:
       enabled: true
