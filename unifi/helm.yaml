@@ -22,12 +22,31 @@ spec:
     service:
       main:
         ports:
+          controller:
+            enabled: false
           stun:
             enabled: false
           syslog:
             enabled: false
           discovery:
             enabled: false
+          speedtest:
+            enabled: false
+      tcp:
+        enabled: true
+        type: LoadBalancer
+        loadBalancerIP: 10.90.3.97
+        annotations:
+          metallb.universe.tf/allow-shared-ip: unifi
+        ports:
+          controller:
+            enabled: true
+            port: 8080
+            protocol: TCP
+          speedtest:
+            enabled: true
+            port: 3478
+            protocol: TCP
       udp:
         enabled: true
         type: LoadBalancer
