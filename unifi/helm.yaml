@@ -12,7 +12,7 @@ spec:
   targetNamespace: unifi
   valuesContent: |-
     image:
-      tag: v5.14.23
+      tag: '5.6'
     env:
       TZ: America/Vancouver
     persistence:
