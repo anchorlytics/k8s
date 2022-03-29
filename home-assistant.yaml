@@ -9,11 +9,10 @@ metadata:
 spec:
   repo: "https://k8s-at-home.com/charts"
   chart: home-assistant
-  version: 12.0.1
+  version: 12.1.0
+  appVersion: 2022.3.7
   targetNamespace: home-assistant
   valuesContent: |-
-    image:
-      tag: 2022.2.9
     ingress:
       main:
         enabled: true
@@ -40,6 +39,8 @@ spec:
       enabled: true
       persistence:
         enabled: true
+      image:
+        tag: 11.15.0
     prometheus:
       serviceMonitor:
         enabled: true
