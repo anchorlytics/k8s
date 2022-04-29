@@ -1,0 +1,52 @@
+
+# https://github.com/k8s-at-home/charts/tree/master/charts/stable/network-ups-tools
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: nut
+  namespace: kube-system
+spec:
+  repo: "https://k8s-at-home.com/charts"
+  chart: network-ups-tools
+  version: 6.2.0
+  targetNamespace: nut
+  valuesContent: |-
+    config:
+      files:
+        ups.conf: |
+          [apc1500]
+          driver=usbhid-ups
+          port=auto
+          vendorid=051d
+          productid=0002
+          [cp1500]
+          driver=usbhid-ups
+          port=auto
+          vendorid=0764
+          productid=0501
+        upsd.users: |
+          [admin]
+          password = admin_pass
+          actions = set
+          actions = fsd
+          instcmds = all
+          [primary]
+          password = primary_pass
+          upsmon primary
+          [secondary]
+          password = secondary_pass
+          upsmon secondary
+        upsmon.conf: |
+          MONITOR apc1500 0 primary primary_pass primary
+          MONITOR cp1500 1 primary primary_pass primary
+          POLLFREQ 15
+          DEADTIME 60
+    securityContext:
+      privileged: true
+    metrics:
+      enabled: true
+      prometheusRule:
+        enabled: true
+    nodeSelector:
+      ups: usb

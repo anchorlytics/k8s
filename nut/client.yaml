@@ -1,24 +1,25 @@
-
-# https://github.com/k8s-at-home/charts/tree/master/charts/stable/network-ups-tools
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
-  name: nut
+  name: nut-client
   namespace: kube-system
 spec:
   repo: "https://k8s-at-home.com/charts"
   chart: network-ups-tools
-  version: 5.0.0
+  version: 6.2.0
   targetNamespace: nut
   valuesContent: |-
     config:
       files:
-        ups.conf: |
-          [rack]
-          driver=usbhid-ups
-          port=auto
+        nut.conf: |
+          MODE=netclient
+        upsmon.conf: |
+          MONITOR apc 1 secondary secondary_pass secondary
+          POLLFREQ 15
+          DEADTIME 60
     securityContext:
       privileged: true
+        enabled: true
     nodeSelector:
-      ups: usb
+      ups: apc
