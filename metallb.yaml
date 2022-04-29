@@ -8,7 +8,7 @@ metadata:
 spec:
   repo: "https://charts.bitnami.com/bitnami"
   chart: metallb
-  version: 2.6.10
+  version: 3.0.1
   valuesContent: |-
     configInline:
       address-pools:
@@ -29,12 +29,14 @@ spec:
     controller:
       nodeSelector:
         role: ingress
-      prometheus:
+      metrics:
+        enabled: true
         serviceMonitor:
           enabled: true
     speaker:
       nodeSelector:
         role: ingress
-      prometheus:
+      metrics:
+        enabled: true
         serviceMonitor:
           enabled: true
