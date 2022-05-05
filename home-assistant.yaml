@@ -33,10 +33,6 @@ spec:
         enabled: true
         retain: true
         existingClaim:
-      usb: 
-        enabled: true
-        type: hostPath
-        hostPath: /dev/ttyACM0
     postgresql:
       enabled: true
       persistence:
@@ -46,7 +42,3 @@ spec:
     prometheus:
       serviceMonitor:
         enabled: true
-    securityContext:
-      privileged: true
-    nodeSelector:
-      ups: usb

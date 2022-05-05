@@ -49,4 +49,4 @@ spec:
       prometheusRule:
         enabled: true
     nodeSelector:
-      ups: usb
+      "feature.node.kubernetes.io/usb-0764_0501.present": "true"

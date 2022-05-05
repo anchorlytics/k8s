@@ -54,7 +54,5 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: zwave
-              operator: In
-              values:
-              - usb
+            - key: "feature.node.kubernetes.io/usb-0658_0200.present"
+              operator: Exists
