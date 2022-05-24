@@ -9,8 +9,8 @@ metadata:
 spec:
   repo: "https://k8s-at-home.com/charts"
   chart: home-assistant
-  version: 13.0.2
-  appVersion: 2022.4.7
+  version: 13.2.0
+  appVersion: 2022.5.4
   targetNamespace: home-assistant
   valuesContent: |-
     ingress:
