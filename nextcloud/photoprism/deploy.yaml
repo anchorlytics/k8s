@@ -1,0 +1,60 @@
+# inspired by https://github.com/p80n/photoprism-helm
+#   (but without .Capabilities.KubeVersion.GitVersion)
+# https://hub.docker.com/r/photoprism/photoprism
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: photoprism
+  namespace: photoprism
+  labels:
+    app: photoprism
+spec:
+  selector:
+    matchLabels:
+      app: photoprism
+  template:
+    metadata:
+      labels:
+        app: photoprism
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: photoprism
+        image: "photoprism/photoprism:220730-bullseye"
+        envFrom:
+        - configMapRef: 
+            name: env
+        - secretRef: 
+            name: pw
+        ports:
+        - name: web
+          containerPort: 2342
+#         livenessProbe:
+#           httpGet:
+#             path: /
+#             port: web
+#         readinessProbe:
+#           httpGet:
+#             path: /
+#             port: web
+        volumeMounts:
+        - name: storage
+          mountPath: /photoprism/storage
+        - name: originals
+          mountPath: /photoprism/originals
+        - name: import
+          mountPath: /photoprism/import
+          readOnly: true
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: storage
+      - name: originals
+        persistentVolumeClaim:
+          claimName: photos
+      - name: import
+        hostPath:
+          path: /mnt/nas/photo/import
+      nodeSelector:
+        kubernetes.io/hostname: jericho

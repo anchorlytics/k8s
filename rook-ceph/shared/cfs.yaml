@@ -5,18 +5,21 @@ metadata:
   namespace: rook-ceph
 spec:
   metadataPool:
-    failureDomain: host
     replicated:
-      size: 2
+      size: 3
     deviceClass: ssd
   dataPools:
-  - failureDomain: host
+  - name: ssd
+    replicated:
+      size: 3
+    deviceClass: ssd
+  - name: hdd
     erasureCoded:
-      dataChunks: 2
-      codingChunks: 1
+      dataChunks: 3
+      codingChunks: 2
     deviceClass: hdd
   preservePoolsOnDelete: true
   metadataServer:
-    activeCount: 3
+    activeCount: 1
     activeStandby: true
 

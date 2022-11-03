@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: photoprism
+  namespace: photoprism
+  labels:
+    app: photoprism
+  annotations:
+    cert-manager.io/cluster-issuer: le-prod
+spec:
+  rules:
+  - host: photo.home.seanho.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: photoprism
+            port: 
+              name: http
+  tls:
+  - secretName: photoprism-tls
+    hosts:
+    - photo.home.seanho.com
+

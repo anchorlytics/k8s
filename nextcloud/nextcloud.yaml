@@ -1,0 +1,70 @@
+# https://github.com/nextcloud/helm/releases
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: nextcloud
+  namespace: kube-system
+spec:
+  repo: "https://nextcloud.github.io/helm/"
+  chart: nextcloud
+  version: 3.1.2
+  targetNamespace: nextcloud
+  valuesContent: |-
+    image:
+      flavor: fpm-alpine
+    ingress:
+      enabled: true
+      className:
+      tls:
+      - secretName: nextcloud-tls
+        hosts:
+        - cloud.home.seanho.com
+      annotations:
+        cert-manager.io/cluster-issuer: le-prod
+    nextcloud:
+      host: cloud.home.seanho.com
+      existingSecret:
+        enabled: true
+        secretName: nextcloud-pw
+        usernameKey: user
+        passwordKey: password
+      extraVolumes:
+      - name: photos
+        persistentVolumeClaim:
+          claimName: photos
+      extraVolumeMounts:
+      - name: photos
+        mountPath: /mnt/photos
+    persistence:
+      enabled: true
+      size: 10G
+      nextcloudData:
+        enabled: true
+        size: 400G
+    nginx:
+      enabled: true
+    internalDatabase:
+      enabled: false
+    externalDatabase:
+      existingSecret:
+        enabled: true
+        secretName: nextcloud-db
+        usernameKey: user
+        passwordKey: password
+    postgresql:
+      enabled: true
+      auth:
+        username: nextcloud
+        database: nextcloud
+        existingSecret: nextcloud-db
+    redis:
+      enabled: true
+      auth:
+        existingSecret: nextcloud-db
+        existingSecretPasswordKey: redis-password
+    cronjob:
+      enabled: false
+    metrics:
+      enabled: false
+

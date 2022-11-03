@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env
+  namespace: photoprism
+  labels:
+    app: photoprism
+data:
+  PHOTOPRISM_SITE_URL: "https://photo.home.seanho.com/"
+  PHOTOPRISM_SITE_caption: "Ho Family Photos"
+  PHOTOPRISM_ORIGINALS_LIMIT: "30"
+  PHOTOPRISM_DATABASE_DRIVER: mysql
+  PHOTOPRISM_DATABASE_SERVER: "mariadb:3306"
+
