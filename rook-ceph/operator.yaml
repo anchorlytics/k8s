@@ -8,16 +8,18 @@ metadata:
 spec:
   repo: "https://charts.rook.io/release"
   chart: rook-ceph
-  version: v1.9.8
+  version: v1.10.4
   targetNamespace: rook-ceph
   valuesContent: |-
     image:
-      tag: v1.9.8
+      tag: v1.10.4
     currentNamespaceOnly: true
-    pspEnable: false
     nodeSelector:
       role: ceph
     discover:
       nodeAffinity: ceph-role=osd
     monitoring:
       enabled: true
+    csi:
+      nfs:
+        enabled: true
