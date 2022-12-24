@@ -19,6 +19,8 @@ spec:
         serviceMonitor:
           enabled: true
     speaker:
+      nodeSelector:
+        role: ingress
       metrics:
         enabled: true
         serviceMonitor:
