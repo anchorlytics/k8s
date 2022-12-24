@@ -8,34 +8,17 @@ metadata:
 spec:
   repo: "https://charts.bitnami.com/bitnami"
   chart: metallb
-  version: 3.0.1
+  version: 4.1.13
+  targetNamespace: metallb-system
   valuesContent: |-
-    configInline:
-      address-pools:
-        - name: MGMT
-          protocol: layer2
-          addresses:
-            - 10.90.3.96/27
-        - name: LAN
-          protocol: layer2
-          addresses:
-            - 10.90.4.96/27
-        - name: IOT
-          protocol: layer2
-          addresses:
-            - 10.90.8.96/27
     prometheusRule:
       enabled: true
     controller:
-      nodeSelector:
-        role: ingress
       metrics:
         enabled: true
         serviceMonitor:
           enabled: true
     speaker:
-      nodeSelector:
-        role: ingress
       metrics:
         enabled: true
         serviceMonitor:
