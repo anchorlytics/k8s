@@ -8,14 +8,13 @@ metadata:
 spec:
   repo: "https://nextcloud.github.io/helm/"
   chart: nextcloud
-  version: 3.1.2
+  version: 3.3.6
   targetNamespace: nextcloud
   valuesContent: |-
     image:
       flavor: fpm-alpine
     ingress:
       enabled: true
-      className:
       tls:
       - secretName: nextcloud-tls
         hosts:
@@ -58,13 +57,16 @@ spec:
         username: nextcloud
         database: nextcloud
         existingSecret: nextcloud-db
+      primary:
+        persistence:
+          enabled: true
     redis:
       enabled: true
       auth:
         existingSecret: nextcloud-db
         existingSecretPasswordKey: redis-password
     cronjob:
-      enabled: false
+      enabled: true
     metrics:
       enabled: false
 
