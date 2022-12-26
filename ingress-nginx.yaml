@@ -11,13 +11,13 @@ spec:
   version: 4.4.0
   targetNamespace: ingress-nginx
   valuesContent: |-
-    service:
-      loadBalancerIP: 10.90.4.96
     controller:
       kind: DaemonSet
       nodeSelector:
         role: ingress
       watchIngressWithoutClass: true
+      service:
+        loadBalancerIP: 10.90.4.96
     metrics:
       enabled: true
       serviceMonitor:
