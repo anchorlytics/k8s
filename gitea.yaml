@@ -1,0 +1,51 @@
+# https://gitea.com/gitea/helm-chart/releases
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: gitea
+  namespace: kube-system
+spec:
+  repo: "https://dl.gitea.io/charts/"
+  chart: gitea
+  version: 6.0.3
+  targetNamespace: gitea
+  valuesContent: |-
+    gitea:
+      config:
+        APP_NAME: "Anchorlytics Code"
+        server:
+          PPROF_ENABLED: true
+      admin:
+        existingSecret: gitea-admin
+      metrics:
+        enabled: true
+    memcached:
+      enabled: true
+    persistence:
+      enabled: true
+      size: 20Gi
+    postgresql:
+      persistence:
+        enabled: true
+    extraVolumes:
+    - name: import
+      hostPath:
+        path: /mnt/share/git
+    extraVolumeMounts:
+    - name: import
+      mountPath: /mnt/import
+    ingress:
+      enabled: true
+      hosts:
+      - host: code.anchorlytics.com
+        paths:
+        - path: /
+          pathType: Prefix
+      tls:
+      - secretName: gitea-tls
+        hosts:
+        - code.home.seanho.com
+      annotations:
+        cert-manager.io/cluster-issuer: le-prod
+
