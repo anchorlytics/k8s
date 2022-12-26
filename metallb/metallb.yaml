@@ -14,6 +14,8 @@ spec:
     prometheusRule:
       enabled: true
     controller:
+      nodeSelector:
+        role: ingress
       metrics:
         enabled: true
         serviceMonitor:
