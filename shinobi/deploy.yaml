@@ -6,7 +6,7 @@ metadata:
   name: shinobi
   namespace: shinobi
   annotations:
-    deployDate: "2022-03-14"
+    deployDate: "2022-12-23"
 spec:
   replicas: 1
   selector:
