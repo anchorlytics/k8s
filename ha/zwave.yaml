@@ -1,4 +1,16 @@
-# https://github.com/k8s-at-home/charts/tree/master/charts/stable/zwavejs2mqtt
+# https://github.com/k8sonlab/publiccharts/tree/main/charts/zwave-js-ui
+# https://github.com/zwave-js/zwave-js-ui
+# /dev/serial/by-id/usb-0658_0200-if00
+# Edit yaml manually:
+# volumeMounts:
+# - mountPath: /dev/zwave
+#   name: zwave
+# volumes:
+# - hostPath:
+#     path: /dev/serial/by-id/usb-0658_0200-if00
+#     type: ""
+#   name: zwave
+#
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
@@ -6,49 +18,37 @@ metadata:
   name: zwave
   namespace: kube-system
 spec:
-  repo: "https://k8s-at-home.com/charts"
-  chart: zwavejs2mqtt
-  version: 5.2.0
+  repo: "https://charts.billias.cc"
+  chart: zwave-js-ui
+  version: 0.2.10
   targetNamespace: home-assistant
   valuesContent: |-
     image:
-      repository: zwavejs/zwavejs2mqtt
-      tag: 6.8.0
-    env:
-      - name: NETWORK_KEY
-        valueFrom:
-          secretKeyRef:
-            name: zwave
-            key: network-key
+      repository: ghcr.io/zwave-js/zwave-js-ui
+      tag: 8.10.1
+    securityContext:
+      privileged: true
+    envFrom:
+    - secretRef:
+        name: zwave
     persistence:
-      usb:
-        enabled: true
-        type: hostPath
-        hostPath: /dev/serial/by-id/usb-0658_0200-if00
-      config:
-        enabled: true
-        mountPath: /usr/src/app/store
-    service:
-      main:
-        ports:
-          websocket:
-            enabled: true
-            port: 3000
+      enabled: true
+      accessMode: ReadWriteOnce
+      existingClaim: zwave-config
     ingress:
-      main:
-        enabled: true
+      enabled: true
+      hosts:
+      - host: zwave.home.seanho.com
+        paths:
+        - path: /
+          pathType: Prefix
+      tls:
+      - secretName: zwave-tls
         hosts:
-        - host: zwave.home.seanho.com
-          paths:
-          - path: /
-            pathType: Prefix
-        tls:
-        - secretName: zwave-tls
-          hosts:
-          - zwave.home.seanho.com
-        annotations:
-          cert-manager.io/cluster-issuer: le-prod
-          nginx.org/websocket-services: zwave
+        - zwave.home.seanho.com
+      annotations:
+        cert-manager.io/cluster-issuer: le-prod
+        nginx.org/websocket-services: zwave
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
