@@ -1,4 +1,5 @@
 # https://github.com/nextcloud/helm/releases
+# https://hub.docker.com/r/library/nextcloud/tags/
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
@@ -8,11 +9,11 @@ metadata:
 spec:
   repo: "https://nextcloud.github.io/helm/"
   chart: nextcloud
-  version: 3.3.6
+  version: 3.5.7
   targetNamespace: nextcloud
   valuesContent: |-
     image:
-      flavor: fpm-alpine
+      tag: 26.0.0-fpm-alpine
     ingress:
       enabled: true
       tls:
@@ -28,13 +29,27 @@ spec:
         secretName: nextcloud-pw
         usernameKey: user
         passwordKey: password
+      configs:
+        proxy.config.php: |-
+          <?php
+          $CONFIG = array(
+           'trusted_proxies' => array('10.42.0.0/16'),
+           'overwrite_protocol' => 'https'
+          );
       extraVolumes:
       - name: photos
         persistentVolumeClaim:
           claimName: photos
+          readOnly: true
+            #      - name: import
+            #        nfs:
+            #          server: nfs.home.seanho.com
+            #          path: /srv/photo
       extraVolumeMounts:
       - name: photos
         mountPath: /mnt/photos
+          #      - name: import
+          #        mountPath: /mnt/import
     persistence:
       enabled: true
       size: 10G
@@ -53,17 +68,21 @@ spec:
         passwordKey: password
     postgresql:
       enabled: true
-      auth:
-        username: nextcloud
-        database: nextcloud
-        existingSecret: nextcloud-db
+      global:
+        postgresql:
+          auth:
+            existingSecret: nextcloud-db
+            secretKeys:
+              userPasswordKey: password
+              adminPasswordKey: postgres-password
+              replicationPasswordKey: replication-password
       primary:
         persistence:
           enabled: true
     redis:
       enabled: true
       auth:
-        existingSecret: nextcloud-db
+        existingSecret: nextcloud-pw
         existingSecretPasswordKey: redis-password
     cronjob:
       enabled: true
