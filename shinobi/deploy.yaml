@@ -1,4 +1,4 @@
-# https://hub.docker.com/r/shinobisystems/shinobi
+# https://gitlab.com/Shinobi-Systems/Shinobi/tree/dev/Docker
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: shinobi
-        image: "shinobisystems/shinobi:latest"
+        image: "registry.gitlab.com/shinobi-systems/shinobi:dev"
         ports:
         - name: http
           containerPort: 8080
