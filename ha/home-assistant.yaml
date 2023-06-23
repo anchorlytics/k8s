@@ -10,11 +10,11 @@ spec:
   repo: "https://k8s-at-home.com/charts"
   chart: home-assistant
   version: 13.4.2
-  appVersion: 2023.3.5
+  appVersion: 2023.6.1
   targetNamespace: home-assistant
   valuesContent: |-
     image:
-      tag: 2023.3.5
+      tag: 2023.6.1
     ingress:
       main:
         enabled: true
