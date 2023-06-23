@@ -1,4 +1,4 @@
-# https://github.com/k8sonlab/publiccharts/tree/main/charts/zwave-js-ui
+# https://artifacthub.io/packages/helm/k8sonlab/zwave-js-ui
 # https://github.com/zwave-js/zwave-js-ui
 # /dev/serial/by-id/usb-0658_0200-if00
 # Edit yaml manually:
@@ -20,12 +20,12 @@ metadata:
 spec:
   repo: "https://charts.billias.cc"
   chart: zwave-js-ui
-  version: 0.2.10
+  version: 0.2.27
   targetNamespace: home-assistant
   valuesContent: |-
     image:
       repository: ghcr.io/zwave-js/zwave-js-ui
-      tag: 8.10.1
+      tag: 8.19.0
     securityContext:
       privileged: true
     envFrom:
