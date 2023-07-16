@@ -1,4 +1,4 @@
-# https://github.com/k8s-at-home/charts/blob/master/charts/stable/home-assistant/Chart.yaml
+# https://artifacthub.io/packages/helm/k8s-home-lab-repo/home-assistant
 # https://hub.docker.com/r/homeassistant/home-assistant/tags
 ---
 apiVersion: helm.cattle.io/v1
@@ -10,11 +10,11 @@ spec:
   repo: "https://k8s-at-home.com/charts"
   chart: home-assistant
   version: 13.4.2
-  appVersion: 2023.6.1
+  appVersion: 2023.7.2
   targetNamespace: home-assistant
   valuesContent: |-
     image:
-      tag: 2023.6.1
+      tag: 2023.7.2
     ingress:
       main:
         enabled: true
