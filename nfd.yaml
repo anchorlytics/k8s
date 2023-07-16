@@ -1,4 +1,4 @@
-# https://github.com/kubernetes-sigs/node-feature-discovery/tree/gh-pages/charts
+# https://github.com/kubernetes-sigs/node-feature-discovery/
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
@@ -8,7 +8,7 @@ metadata:
 spec:
   repo: "https://kubernetes-sigs.github.io/node-feature-discovery/charts"
   chart: node-feature-discovery
-  version: 0.12.1
+  version: 0.13.2
   targetNamespace: node-feature-discovery
   valuesContent: |-
     worker:
