@@ -1,0 +1,76 @@
+# https://github.com/grafana/loki/tree/main/production/helm/loki
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: loki
+  namespace: kube-system
+spec:
+  repo: "https://grafana.github.io/helm-charts"
+  chart: loki
+  version: 5.8.9
+  targetNamespace: loki
+  valuesContent: |-
+    ingress:
+      enabled: true
+      hosts:
+      - loki.home.seanho.com
+      tls:
+      - secretName: loki-tls
+        hosts:
+        - loki.home.seanho.com
+      annotations:
+        cert-manager.io/cluster-issuer: le-prod
+    write:
+      extraArgs:
+      - "-config.expand-env=true"
+      extraEnvFrom:
+      - configMapRef:
+          name: loki-data
+      - secretRef:
+          name: loki-data
+    read:
+      extraArgs:
+      - "-config.expand-env=true"
+      extraEnvFrom:
+      - configMapRef:
+          name: loki-data
+      - secretRef:
+          name: loki-data
+    backend:
+      extraArgs:
+      - "-config.expand-env=true"
+      extraEnvFrom:
+      - configMapRef:
+          name: loki-data
+      - secretRef:
+          name: loki-data
+    gateway:
+      extraArgs:
+      - "-config.expand-env=true"
+      extraEnvFrom:
+      - configMapRef:
+          name: loki-data
+      - secretRef:
+          name: loki-data
+    loki:
+      storage:
+        bucketNames:
+          chunks: ${BUCKET_NAME}
+          ruler: ${BUCKET_NAME}
+        s3:
+          endpoint: ${BUCKET_HOST}
+          accessKeyId: ${AWS_ACCESS_KEY_ID}
+          secretAccessKey: ${AWS_SECRET_ACCESS_KEY}
+          insecure: true
+    monitoring:
+      dashboards:
+        namespace: grafana
+      lokiCanary:
+        extraArgs:
+        - "-config.expand-env=true"
+        extraEnvFrom:
+        - configMapRef:
+            name: loki-data
+        - secretRef:
+            name: loki-data
