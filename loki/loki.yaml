@@ -66,11 +66,3 @@ spec:
     monitoring:
       dashboards:
         namespace: grafana
-      lokiCanary:
-        extraArgs:
-        - "-config.expand-env=true"
-        extraEnvFrom:
-        - configMapRef:
-            name: loki-data
-        - secretRef:
-            name: loki-data
