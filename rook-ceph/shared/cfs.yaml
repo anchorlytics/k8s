@@ -15,7 +15,7 @@ spec:
     deviceClass: ssd
   - name: hdd
     erasureCoded:
-      dataChunks: 3
+      dataChunks: 2
       codingChunks: 2
     deviceClass: hdd
   preserveFilesystemOnDelete: true
