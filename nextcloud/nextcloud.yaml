@@ -9,26 +9,38 @@ metadata:
 spec:
   repo: "https://nextcloud.github.io/helm/"
   chart: nextcloud
-  version: 3.5.7
+  version: 4.2.1
   targetNamespace: nextcloud
   valuesContent: |-
     image:
-      tag: 26.0.0-fpm-alpine
+      tag: 27.0.2-fpm-alpine
+    replicaCount: 2
     ingress:
       enabled: true
+      className: external
+      annotations:
+        cert-manager.io/cluster-issuer: le-prod
+        kubernetes.io/ingress.class: external
       tls:
       - secretName: nextcloud-tls
         hosts:
-        - cloud.home.seanho.com
-      annotations:
-        cert-manager.io/cluster-issuer: le-prod
+        - cloud-int.seanho.com
     nextcloud:
-      host: cloud.home.seanho.com
+      host: cloud-int.seanho.com
       existingSecret:
         enabled: true
         secretName: nextcloud-pw
         usernameKey: user
         passwordKey: password
+        smtpUsernameKey: smtp-user
+        smtpPasswordKey: smtp-password
+        smtpHostKey: smtp-host
+      mail:
+        enabled: true
+        fromAddress: nextcloud@seanho.com
+        domain: seanho.com
+        smtp:
+          secure: true
       configs:
         proxy.config.php: |-
           <?php
@@ -36,31 +48,42 @@ spec:
            'trusted_proxies' => array('10.42.0.0/16'),
            'overwrite_protocol' => 'https'
           );
+        custom.config.php: |-
+          <?php
+          $CONFIG = array(
+           'default_phone_region' => 'US'
+          );
       extraVolumes:
       - name: photos
         persistentVolumeClaim:
           claimName: photos
+          readOnly: false
+      - name: import
+        nfs:
+          server: nfs.home.seanho.com
+          path: /srv/photo
           readOnly: true
-            #      - name: import
-            #        nfs:
-            #          server: nfs.home.seanho.com
-            #          path: /srv/photo
       extraVolumeMounts:
       - name: photos
         mountPath: /mnt/photos
-          #      - name: import
-          #        mountPath: /mnt/import
+      - name: import
+        mountPath: /mnt/import
     persistence:
       enabled: true
+      storageClass: shared-ssd
+      accessMode: ReadWriteMany
       size: 10G
       nextcloudData:
         enabled: true
+        storageClass: shared-ssd
+        accessMode: ReadWriteMany
         size: 400G
     nginx:
       enabled: true
     internalDatabase:
       enabled: false
     externalDatabase:
+      type: postgresql
       existingSecret:
         enabled: true
         secretName: nextcloud-db
