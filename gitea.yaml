@@ -9,13 +9,17 @@ metadata:
 spec:
   repo: "https://dl.gitea.io/charts/"
   chart: gitea
-  version: 8.3.0
+  version: 9.4.0
   targetNamespace: gitea
   valuesContent: |-
+    replicaCount: 2
     image:
-      tag: 1.19.4
+      tag: 1.20.4
     persistence:
       size: 20Gi
+      storageClass: shared-ssd
+      accessModes: 
+      - ReadWriteMany
     gitea:
       admin:
         existingSecret: gitea-admin
@@ -30,10 +34,6 @@ spec:
     ingress:
       enabled: true
       hosts:
-      - host: code.anchorlytics.com
-        paths:
-        - path: /
-          pathType: Prefix
       - host: code.home.seanho.com
         paths:
         - path: /
@@ -44,17 +44,12 @@ spec:
         - code.home.seanho.com
       annotations:
         cert-manager.io/cluster-issuer: le-prod
-    postgresql:
-      auth:
-        secretKeys:
-          adminPasswordKey: password
-          userPasswordKey: postgres-password
-    extraVolumes:
-    - name: import
-      nfs:
-        server: nfs.home.seanho.com
-        path: /srv/share/git
-        readOnly: true
-    extraContainerVolumeMounts:
-    - name: import
-      mountPath: /mnt/import
+            #    extraVolumes:
+            #    - name: import
+            #      nfs:
+            #        server: nfs.home.seanho.com
+            #        path: /srv/share/git
+            #        readOnly: true
+            #    extraContainerVolumeMounts:
+            #    - name: import
+            #      mountPath: /mnt/import
