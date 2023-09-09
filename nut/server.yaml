@@ -15,16 +15,18 @@ spec:
     config:
       files:
         ups.conf: |
-          [apc1500]
+          [apc]
           driver=usbhid-ups
           port=auto
           vendorid=051d
           productid=0002
-          [cp1500]
+          sdorder=0
+          [cp]
           driver=usbhid-ups
           port=auto
           vendorid=0764
           productid=0501
+          sdorder=1
         upsd.users: |
           [admin]
           password = admin_pass
@@ -38,12 +40,32 @@ spec:
           password = secondary_pass
           upsmon secondary
         upsmon.conf: |
-          MONITOR apc1500 0 primary primary_pass primary
-          MONITOR cp1500 1 primary primary_pass primary
+          MONITOR apc 0 primary primary_pass primary
+          MONITOR cp 1 primary primary_pass primary
           POLLFREQ 15
           DEADTIME 60
+          SHUTDOWNCMD "/sbin/shutdown -h now"
     securityContext:
       privileged: true
+    service:
+      main:
+        ports:
+          http:
+            enabled: true
+    ingress:
+      main:
+        enabled: true
+        hosts:
+        - host: ups.home.seanho.com
+          paths:
+          - path: /
+            pathType: Prefix
+        tls:
+        - secretName: nut-tls
+          hosts:
+          - ups.home.seanho.com
+        annotations:
+          cert-manager.io/cluster-issuer: le-prod
     metrics:
       enabled: true
       prometheusRule:
