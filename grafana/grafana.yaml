@@ -1,0 +1,28 @@
+# https://github.com/grafana/helm-charts/tree/main/charts/grafana
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: grafana
+  namespace: kube-system
+spec:
+  repo: "https://grafana.github.io/helm-charts"
+  chart: grafana
+  version: 6.55.0
+  targetNamespace: grafana
+  valuesContent: |-
+    ingress:
+      enabled: true
+      hosts:
+      - grafana.home.seanho.com
+      tls:
+      - secretName: grafana-tls
+        hosts:
+        - grafana.home.seanho.com
+      annotations:
+        cert-manager.io/cluster-issuer: le-prod
+    persistence:
+      enabled: true
+    grafana.ini:
+      server:
+        domain: grafana.home.seanho.com
