@@ -4,8 +4,8 @@ metadata:
   name: nfs-shared-hdd
 provisioner: rook-ceph.nfs.csi.ceph.com
 parameters:
-  nfsCluster: nfs
-  server: rook-ceph-nfs-nfs
+  nfsCluster: cephnfs
+  server: rook-ceph-nfs-cephnfs
   clusterID: rook-ceph
   fsName: shared
   pool: shared-hdd

@@ -1,7 +1,7 @@
 apiVersion: ceph.rook.io/v1
 kind: CephNFS
 metadata:
-  name: nfs
+  name: cephnfs
   namespace: rook-ceph
 spec:
   server:
