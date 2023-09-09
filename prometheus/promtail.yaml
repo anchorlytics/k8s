@@ -1,0 +1,45 @@
+# https://github.com/grafana/helm-charts/tree/main/charts/promtail
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: promtail
+  namespace: kube-system
+spec:
+  repo: "https://grafana.github.io/helm-charts"
+  chart: promtail
+  version: 6.11.9
+  targetNamespace: promtail
+  valuesContent: |-
+    extraPorts:
+      syslog:
+        name: tcp-syslog
+        containerPort: 1514
+        service:
+          port: 514
+          type: LoadBalancer
+          externalTrafficPolicy: Local
+          loadBalancerIP: 10.90.4.97
+    config:
+      clients:
+      - url: http://loki-gateway.loki/loki/api/v1/push
+        tenant_id: 1
+      snippets:
+        extraScrapeConfigs: |
+          - job_name: syslog
+            syslog:
+              listen_address: "0.0.0.0:1514"
+              idle_timeout: 60s
+              label_structured_data: yes
+              labels:
+                job: syslog
+            relabel_configs:
+            - source_labels:
+              - __syslog_message_hostname
+              target_label: host
+            - source_labels:
+              - __syslog_message_app_name
+              target_label: app
+            - source_labels:
+              - __syslog_message_severity
+              target_label: level
