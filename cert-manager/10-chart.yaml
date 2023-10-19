@@ -8,12 +8,11 @@ metadata:
 spec:
   repo: "https://charts.jetstack.io"
   chart: cert-manager
-  version: 1.12.2
+  version: 1.13.1
   targetNamespace: cert-manager
   valuesContent: |-
     installCRDs: true
     prometheus:
-      enabled: true
       servicemonitor:
         enabled: true
     ingressShim:
