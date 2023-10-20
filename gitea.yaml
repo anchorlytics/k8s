@@ -1,5 +1,6 @@
 # https://gitea.com/gitea/helm-chart/releases
-# https://hub.docker.com/r/gitea/gitea/tags?page=1&ordering=last_updated
+# https://codeberg.org/forgejo/-/packages/container/forgejo/versions
+# GIT_GC_REPOS workaround: https://gitea.com/gitea/helm-chart/issues/488
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
@@ -9,12 +10,14 @@ metadata:
 spec:
   repo: "https://dl.gitea.io/charts/"
   chart: gitea
-  version: 9.4.0
+  version: 9.5.1
   targetNamespace: gitea
   valuesContent: |-
     replicaCount: 2
     image:
-      tag: 1.20.4
+      #      registry: codeberg.org
+      #      repository: forgejo/forgejo
+      tag: 1.20.5
     persistence:
       size: 20Gi
       storageClass: shared-ssd
@@ -27,6 +30,8 @@ spec:
         APP_NAME: "Anchorlytics Code"
         server:
           PPROF_ENABLED: true
+        "cron.GIT_GC_REPOS": 
+          ENABLED: false
       metrics:
         enabled: true
         serviceMonitor:
