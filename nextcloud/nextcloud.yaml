@@ -59,14 +59,15 @@ spec:
         persistentVolumeClaim:
           claimName: photos
           readOnly: false
-      - name: import
-        nfs:
-          server: nfs.home.seanho.com
-          path: /srv/photo
-          readOnly: true
+      - name: videos
+        persistentVolumeClaim:
+          claimName: videos
+          readOnly: false
       extraVolumeMounts:
       - name: photos
         mountPath: /mnt/photos
+      - name: videos
+        mountPath: /mnt/videos
     persistence:
       enabled: true
       storageClass: shared-ssd
