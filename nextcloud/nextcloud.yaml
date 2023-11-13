@@ -22,6 +22,8 @@ spec:
         cert-manager.io/cluster-issuer: le-prod
         kubernetes.io/ingress.class: external
         nginx.ingress.kubernetes.io/proxy-body-size: 1g
+        nginx.ingress.kubernetes.io/enable-cors: true
+        nginx.ingress.kubernetes.io/cors-allow-headers: "X-Forwarded-For"
       tls:
       - secretName: nextcloud-tls
         hosts:
@@ -47,7 +49,8 @@ spec:
           <?php
           $CONFIG = array(
            'trusted_proxies' => array('10.42.0.0/16'),
-           'overwrite_protocol' => 'https'
+           'overwrite_protocol' => 'https',
+           'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
           );
         custom.config.php: |-
           <?php
