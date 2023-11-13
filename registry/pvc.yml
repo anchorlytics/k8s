@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: registry
+  namespace: registry
+spec:
+  storageClassName: shared-ssd
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 500G
+
