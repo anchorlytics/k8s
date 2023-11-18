@@ -1,0 +1,52 @@
+# https://gitea.com/gitea/act_runner/src/branch/main/examples/kubernetes/rootless-docker.yaml
+# GITEA_RUNNER_REGISTRATION_TOKEN is one-time use;
+# the credentials are stored in /data, so it must be persisted
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: runner
+  namespace: gitea
+  labels:
+    app: runner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: runner
+  template:
+    metadata:
+      labels:
+        app: runner
+    spec:
+      restartPolicy: Always
+      volumes:
+      - name: runner-data
+        persistentVolumeClaim:
+          claimName: runner-data
+      securityContext:
+        fsGroup: 1000
+      containers:
+      - name: runner
+        image: gitea/act_runner:nightly-dind-rootless
+        imagePullPolicy: Always
+        env:
+        - name: DOCKER_HOST
+          value: tcp://localhost:2376
+        - name: DOCKER_CERT_PATH
+          value: /certs/client
+        - name: DOCKER_TLS_VERIFY
+          value: "1"
+        - name: GITEA_INSTANCE_URL
+          value: http://gitea-http.gitea.svc.cluster.local:3000
+        - name: GITEA_RUNNER_REGISTRATION_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: runner-token
+              key: token
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: runner-data
+          mountPath: /data
+

@@ -32,6 +32,8 @@ spec:
           PPROF_ENABLED: true
         "cron.GIT_GC_REPOS": 
           ENABLED: false
+        actions:
+          ENABLED: true
       metrics:
         enabled: true
         serviceMonitor:
@@ -49,12 +51,5 @@ spec:
         - code.home.seanho.com
       annotations:
         cert-manager.io/cluster-issuer: le-prod
-            #    extraVolumes:
-            #    - name: import
-            #      nfs:
-            #        server: nfs.home.seanho.com
-            #        path: /srv/share/git
-            #        readOnly: true
-            #    extraContainerVolumeMounts:
-            #    - name: import
-            #      mountPath: /mnt/import
+#    extraVolumes:
+#    extraContainerVolumeMounts:
