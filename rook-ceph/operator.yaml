@@ -8,11 +8,11 @@ metadata:
 spec:
   repo: "https://charts.rook.io/release"
   chart: rook-ceph
-  version: v1.12.7
+  version: v1.12.8
   targetNamespace: rook-ceph
   valuesContent: |-
     image:
-      tag: v1.12.7
+      tag: v1.12.8
     currentNamespaceOnly: true
     nodeSelector:
       role: ceph
