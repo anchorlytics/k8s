@@ -9,11 +9,11 @@ metadata:
 spec:
   repo: "https://nextcloud.github.io/helm/"
   chart: nextcloud
-  version: 4.3.6
+  version: 4.6.2
   targetNamespace: nextcloud
   valuesContent: |-
     image:
-      tag: 27.1.3-fpm-alpine
+      tag: 28.0.2-fpm-alpine
     replicaCount: 2
     ingress:
       enabled: true
@@ -22,7 +22,7 @@ spec:
         cert-manager.io/cluster-issuer: le-prod
         kubernetes.io/ingress.class: external
         nginx.ingress.kubernetes.io/proxy-body-size: 1g
-        nginx.ingress.kubernetes.io/enable-cors: true
+        nginx.ingress.kubernetes.io/enable-cors: "true"
         nginx.ingress.kubernetes.io/cors-allow-headers: "X-Forwarded-For"
       tls:
       - secretName: nextcloud-tls
@@ -51,6 +51,7 @@ spec:
            'trusted_proxies' => array('10.42.0.0/16'),
            'overwrite_protocol' => 'https',
            'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
+           'maintenance_window_start' => 3,
           );
         custom.config.php: |-
           <?php
@@ -80,7 +81,7 @@ spec:
         enabled: true
         storageClass: shared-ssd
         accessMode: ReadWriteMany
-        size: 400G
+        size: 800G
     nginx:
       enabled: true
     internalDatabase:
