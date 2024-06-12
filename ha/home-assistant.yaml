@@ -7,14 +7,13 @@ metadata:
   name: home-assistant
   namespace: kube-system
 spec:
-  repo: "https://k8s-at-home.com/charts"
+  repo: "https://k8s-home-lab.github.io/helm-charts/"
   chart: home-assistant
-  version: 13.4.2
-  appVersion: 2023.7.2
+  version: 14.0.1
   targetNamespace: home-assistant
   valuesContent: |-
     image:
-      tag: 2023.7.2
+      tag: 2024.6.2
     ingress:
       main:
         enabled: true
@@ -40,7 +39,7 @@ spec:
       persistence:
         enabled: true
       image:
-        tag: 11.15.0
+        tag: 11.21.0
     prometheus:
       serviceMonitor:
         enabled: true
