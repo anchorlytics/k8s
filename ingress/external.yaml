@@ -25,6 +25,7 @@ spec:
         use-proxy-protocol: true
         enable-real-ip: true
         proxy-real-ip-cidr: 10.90.10.67/24
+        use-http2: true
     metrics:
       enabled: true
       serviceMonitor:
