@@ -1,3 +1,5 @@
+# ceph nfs export create cephfs cephnfs /shared shared
+---
 apiVersion: ceph.rook.io/v1
 kind: CephFilesystem
 metadata:
