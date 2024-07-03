@@ -9,11 +9,11 @@ metadata:
 spec:
   repo: "https://blakeblackshear.github.io/blakeshome-charts/"
   chart: frigate
-  version: 6.3.0
+  version: 7.3.0
   targetNamespace: home-assistant
   valuesContent: |-
     image:
-      tag: 0.10.1
+      tag: 0.13.2
     ingress:
       enabled: true
       hosts:
@@ -29,6 +29,13 @@ spec:
         cert-manager.io/cluster-issuer: le-prod
         nginx.org/websocket-services: frigate
     shmSize: 8Gi
+    persistence:
+      config:
+        enabled: true
+      media:
+        enabled: true
+        size: 8Ti
+        skipuninstall: true
     config: |
       detectors:
         cpu:
