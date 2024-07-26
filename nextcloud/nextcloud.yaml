@@ -9,11 +9,11 @@ metadata:
 spec:
   repo: "https://nextcloud.github.io/helm/"
   chart: nextcloud
-  version: 5.0.2
+  version: 5.3.2
   targetNamespace: nextcloud
   valuesContent: |-
     image:
-      tag: 29.0.3-fpm-alpine
+      tag: 29.0.4-fpm-alpine
     replicaCount: 2
     ingress:
       enabled: true
@@ -103,7 +103,7 @@ spec:
     postgresql:
       enabled: true
       image:
-        tag: 15.5.0
+        tag: 15.7.0
       global:
         postgresql:
           auth:
@@ -113,6 +113,7 @@ spec:
               adminPasswordKey: postgres-password
               replicationPasswordKey: replication-password
       primary:
+        resourcesPreset: micro
         persistence:
           enabled: true
     redis:
