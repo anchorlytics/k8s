@@ -9,11 +9,11 @@ metadata:
 spec:
   repo: "https://nextcloud.github.io/helm/"
   chart: nextcloud
-  version: 5.3.2
+  version: 6.2.4
   targetNamespace: nextcloud
   valuesContent: |-
     image:
-      tag: 29.0.4-fpm-alpine
+      tag: 30.0.2-fpm-alpine
     replicaCount: 2
     ingress:
       enabled: true
@@ -48,7 +48,7 @@ spec:
         proxy.config.php: |-
           <?php
           $CONFIG = array(
-           'trusted_proxies' => array('10.42.0.0/16'),
+           'trusted_proxies' => ['127.0.0.1/8', '10.42.0.0/16'],
            'overwrite_protocol' => 'https',
            'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
            'maintenance_window_start' => 3,
