@@ -8,7 +8,7 @@ metadata:
 spec:
   repo: "https://kubernetes.github.io/ingress-nginx"
   chart: ingress-nginx
-  version: 4.10.1
+  version: 4.11.3
   targetNamespace: ingress-nginx
   valuesContent: |-
     controller:
@@ -22,10 +22,9 @@ spec:
       service:
         loadBalancerIP: 10.90.4.98
       config:
-        use-proxy-protocol: true
-        enable-real-ip: true
-        proxy-real-ip-cidr: 10.90.10.67/24
         use-http2: true
+        use-proxy-protocol: true
+      allowSnippetAnnotations: true
     metrics:
       enabled: true
       serviceMonitor:
