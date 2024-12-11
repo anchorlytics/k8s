@@ -36,6 +36,8 @@ spec:
         enabled: true
         size: 8Ti
         skipuninstall: true
+    envFromSecrets:
+    - frigate-pw
     config: |
       detectors:
         cpu:
