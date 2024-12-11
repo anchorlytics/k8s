@@ -20,7 +20,7 @@ spec:
       - host: frigate.home.seanho.com
         paths:
         - path: /
-          pathType: Prefix
+          portName: http
       tls:
       - secretName: frigate-tls
         hosts:
@@ -35,50 +35,52 @@ spec:
       media:
         enabled: true
         size: 8Ti
+        storageClass: nvr
         skipuninstall: true
     envFromSecrets:
     - frigate-pw
     config: |
+      mqtt:
+        enabled: false
+        user: "{FRIGATE_MQTT_USER}"
+        password: "{FRIGATE_MQTT_PASSWORD}"
       detectors:
         cpu:
           type: cpu
           num_threads: 4
-      mqtt:
-        enabled: false
-        host: mqtt
-        port: 1833
-        user: frigate
-        password: "{FRIGATE_MQTT_PASSWORD}"
       detect:
-        width: 1280
-        height: 720
+        enabled: True
         fps: 4
+      motion:
+        enabled: True
       record:
         enabled: true
         expire_interval: 120
         retain:
           days: 14
           mode: all
-      events:
-        max_seconds: 600
-        pre_capture: 10
-        post_capture: 10
-        retain:
-          default: 30
-      ffmpeg:
-          input_args: "-avoid_negative_ts make_zero -fflags nobuffer -flags low_delay -strict experimental -fflags +genpts+discardcorrupt -rw_timeout 5000000 -use_wallclock_as_timestamps 1"
+      snapshots:
+        enabled: True
       cameras:
-        porch_detect:
-          ffmpeg:
-            inputs:
-              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@porch.iot.seanho.com:554/Streaming/Channels/2
-                roles:
-                - rtmp
-                - detect
-        porch_record:
+        porch:
+          audio:
+            enabled: True
           ffmpeg:
             inputs:
               - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@porch.iot.seanho.com:554/Streaming/Channels/1
                 roles:
-                - rtmp
                 - record
+                output_args: preset-record-generic-audio-copy
+              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@porch.iot.seanho.com:554/Streaming/Channels/2
+                roles:
+                - detect
+                - audio
+        rear:
+          ffmpeg:
+            inputs:
+              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@rear.iot.seanho.com:554/Streaming/Channels/1
+                roles:
+                - record
+              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@rear.iot.seanho.com:554/Streaming/Channels/2
+                roles:
+                - detect
