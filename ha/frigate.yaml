@@ -9,11 +9,11 @@ metadata:
 spec:
   repo: "https://blakeblackshear.github.io/blakeshome-charts/"
   chart: frigate
-  version: 7.3.0
+  version: 7.6.0
   targetNamespace: home-assistant
   valuesContent: |-
     image:
-      tag: 0.13.2
+      tag: 0.14.0
     ingress:
       enabled: true
       hosts:
@@ -42,6 +42,7 @@ spec:
           type: cpu
           num_threads: 4
       mqtt:
+        enabled: false
         host: mqtt
         port: 1833
         user: frigate
@@ -65,17 +66,17 @@ spec:
       ffmpeg:
           input_args: "-avoid_negative_ts make_zero -fflags nobuffer -flags low_delay -strict experimental -fflags +genpts+discardcorrupt -rw_timeout 5000000 -use_wallclock_as_timestamps 1"
       cameras:
-        front_detect:
+        porch_detect:
           ffmpeg:
             inputs:
-              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@front.iot.seanho.com:554/Streaming/Channels/2
+              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@porch.iot.seanho.com:554/Streaming/Channels/2
                 roles:
                 - rtmp
                 - detect
-        front_record:
+        porch_record:
           ffmpeg:
             inputs:
-              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@front.iot.seanho.com:554/Streaming/Channels/1
+              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@porch.iot.seanho.com:554/Streaming/Channels/1
                 roles:
                 - rtmp
                 - record
