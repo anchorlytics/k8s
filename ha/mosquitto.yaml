@@ -1,0 +1,23 @@
+# https://artifacthub.io/packages/helm/k8sonlab/mosquitto
+# https://hub.docker.com/_/eclipse-mosquitto
+# Overwrite secret/mosquitto for passwd/ACLs
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: mosquitto
+  namespace: kube-system
+spec:
+  repo: "https://charts.ar80.eu"
+  chart: mosquitto
+  version: 2.5.0
+  targetNamespace: home-assistant
+  valuesContent: |-
+    image:
+      tag: 2.0.15
+    authentication:
+      passwordEntries: |
+        mqtt:changeme
+      acls: |
+        user mqtt
+        topic readwrite #
