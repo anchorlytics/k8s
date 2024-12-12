@@ -42,6 +42,7 @@ spec:
     config: |
       mqtt:
         enabled: false
+        host: mqtt
         user: "{FRIGATE_MQTT_USER}"
         password: "{FRIGATE_MQTT_PASSWORD}"
       detectors:
@@ -63,6 +64,9 @@ spec:
         enabled: True
       cameras:
         porch:
+          motion:
+            mask:
+            - "1,0.422,0.631,0.153,0.632,0,1,0"
           audio:
             enabled: True
           ffmpeg:
@@ -70,12 +74,14 @@ spec:
               - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@porch.iot.seanho.com:554/Streaming/Channels/1
                 roles:
                 - record
-                output_args: preset-record-generic-audio-copy
               - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@porch.iot.seanho.com:554/Streaming/Channels/2
                 roles:
                 - detect
                 - audio
         rear:
+          motion:
+            mask:
+            - "0.875,0,0.875,0.112,0.967,0.144,1,0.277,1,0"
           ffmpeg:
             inputs:
               - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@rear.iot.seanho.com:554/Streaming/Channels/1
