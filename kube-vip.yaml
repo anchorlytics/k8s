@@ -1,0 +1,36 @@
+# https://github.com/kube-vip/helm-charts/tree/main/charts/kube-vip
+# https://github.com/kube-vip/kube-vip/releases
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: kube-vip
+  namespace: kube-system
+spec:
+  repo: "https://kube-vip.github.io/helm-charts"
+  chart: kube-vip
+  version: 0.6.2
+  targetNamespace: kube-system
+  valuesContent: |-
+    image:
+      tag: v0.8.3
+    config:
+      address: k8s.k8s.seanho.com
+    env:
+      vip_interface: k8s
+      cp_enable: "true"
+      vip_ddns: "true"
+      vip_leaderelection: "true"
+      enable_node_labeling: "true"
+    envFrom:
+      secretKeyRef:
+        name: kube-vip
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/master
+              operator: Exists
+          - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists
