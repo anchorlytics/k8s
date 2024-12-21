@@ -13,7 +13,7 @@ spec:
   targetNamespace: home-assistant
   valuesContent: |-
     image:
-      tag: 0.14.0
+      tag: 0.14.1
     ingress:
       enabled: true
       hosts:
@@ -29,6 +29,8 @@ spec:
         cert-manager.io/cluster-issuer: le-prod
         nginx.org/websocket-services: frigate
     shmSize: 8Gi
+    tmpfs:
+      sizeLimit: 8Gi
     persistence:
       config:
         enabled: true
