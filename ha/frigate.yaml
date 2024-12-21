@@ -32,6 +32,7 @@ spec:
     persistence:
       config:
         enabled: true
+        size: 8Gi
       media:
         enabled: true
         size: 8Ti
@@ -88,5 +89,15 @@ spec:
                 roles:
                 - record
               - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@rear.iot.seanho.com:554/Streaming/Channels/2
+                roles:
+                - detect
+        cube2:
+          motion:
+            enabled: False
+          detect:
+            enabled: False
+          ffmpeg:
+            inputs:
+              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@cube2.iot.seanho.com:554/Streaming/Channels/2
                 roles:
                 - detect
