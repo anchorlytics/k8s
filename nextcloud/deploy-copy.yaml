@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: copy-shared
+  namespace: nextcloud
+  labels:
+    app: copy-shared
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: copy-shared
+  template:
+    metadata:
+      labels:
+        app: copy-shared
+    spec:
+      containers:
+      - name: debian
+        image: debian:stable-slim
+        command:
+        - sleep
+        args:
+        - infinity
+        volumeMounts:
+        - name: share
+          mountPath: /mnt/share
+        - name: shared
+          mountPath: /mnt/shared
+      volumes:
+      - name: share
+        nfs:
+          server: nfs.home.seanho.com
+          path: /srv/share
+          readOnly: true
+      - name: shared
+        persistentVolumeClaim:
+          claimName: shared
+
