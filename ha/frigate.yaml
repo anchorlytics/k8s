@@ -65,40 +65,84 @@ spec:
           mode: all
       snapshots:
         enabled: True
+      go2rtc:
+        streams:
+          porch_rec:
+          - rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@porch.iot.seanho.com/cam/realmonitor?channel=1&subtype=0
+          porch_sub:
+          - rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@porch.iot.seanho.com/cam/realmonitor?channel=1&subtype=1
+          front_rec:
+          - rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@front.iot.seanho.com/stream1
+          front_sub:
+          - rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@front.iot.seanho.com/stream2
+          rear_rec:
+          - rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@rear.iot.seanho.com/Streaming/Channels/1
+          rear_sub:
+          - rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@rear.iot.seanho.com/Streaming/Channels/2
+          cube1_sub:
+          - ffmpeg:rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@cube1.iot.seanho.com/Streaming/Channels/2
+          - "ffmpeg:cube1_sub#audio=opus"
+          cube2_sub:
+          - ffmpeg:rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@cube2.iot.seanho.com/Streaming/Channels/2
       cameras:
         porch:
           audio:
             enabled: True
           ffmpeg:
+            output_args:
+              record: preset-record-generic-audio-copy
             inputs:
-              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@porch.iot.seanho.com/cam/realmonitor?channel=1&subtype=0
-                roles:
-                - record
-              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@porch.iot.seanho.com/cam/realmonitor?channel=1&subtype=1
-                roles:
-                - detect
-                - audio
+            - path: rtsp://localhost:8554/porch_rec
+              input_args: preset-rtsp-restream
+              roles:
+              - record
+            - path: rtsp://localhost:8554/porch_sub
+              input_args: preset-rtsp-restream
+              roles:
+              - detect
+              - audio
         front:
           ffmpeg:
+            output_args:
+              record: preset-record-generic-audio-copy
             inputs:
-              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@front.iot.seanho.com/stream1
-                roles:
-                - record
-              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@front.iot.seanho.com/stream2
-                roles:
-                - detect
+            - path: rtsp://localhost:8554/front_rec
+              input_args: preset-rtsp-restream
+              roles:
+              - record
+            - path: rtsp://localhost:8554/front_sub
+              input_args: preset-rtsp-restream
+              roles:
+              - detect
         rear:
           motion:
             mask:
             - "0.875,0,0.875,0.112,0.967,0.144,1,0.277,1,0"
           ffmpeg:
+            output_args:
+              record: preset-record-generic-audio-copy
             inputs:
-              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@rear.iot.seanho.com:554/Streaming/Channels/1
-                roles:
-                - record
-              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@rear.iot.seanho.com:554/Streaming/Channels/2
-                roles:
-                - detect
+            - path: rtsp://localhost:8554/rear_rec
+              input_args: preset-rtsp-restream
+              roles:
+              - record
+            - path: rtsp://localhost:8554/rear_sub
+              input_args: preset-rtsp-restream
+              roles:
+              - detect
+        cube1:
+          motion:
+            enabled: False
+          detect:
+            enabled: False
+          snapshots:
+            enabled: False
+          ffmpeg:
+            inputs:
+            - path: rtsp://localhost:8554/cube1_sub
+              input_args: preset-rtsp-restream
+              roles:
+              - detect
         cube2:
           motion:
             enabled: False
@@ -106,6 +150,7 @@ spec:
             enabled: False
           ffmpeg:
             inputs:
-              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@cube2.iot.seanho.com:554/Streaming/Channels/2
-                roles:
-                - detect
+            - path: rtsp://localhost:8554/cube2_sub
+              input_args: preset-rtsp-restream
+              roles:
+              - detect
