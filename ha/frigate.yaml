@@ -67,20 +67,26 @@ spec:
         enabled: True
       cameras:
         porch:
-          motion:
-            mask:
-            - "1,0.422,0.631,0.153,0.632,0,1,0"
           audio:
             enabled: True
           ffmpeg:
             inputs:
-              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@porch.iot.seanho.com:554/Streaming/Channels/1
+              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@porch.iot.seanho.com/cam/realmonitor?channel=1&subtype=0
                 roles:
                 - record
-              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@porch.iot.seanho.com:554/Streaming/Channels/2
+              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@porch.iot.seanho.com/cam/realmonitor?channel=1&subtype=1
                 roles:
                 - detect
                 - audio
+        front:
+          ffmpeg:
+            inputs:
+              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@front.iot.seanho.com/stream1
+                roles:
+                - record
+              - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@front.iot.seanho.com/stream2
+                roles:
+                - detect
         rear:
           motion:
             mask:
