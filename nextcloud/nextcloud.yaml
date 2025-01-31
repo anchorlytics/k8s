@@ -9,11 +9,11 @@ metadata:
 spec:
   repo: "https://nextcloud.github.io/helm/"
   chart: nextcloud
-  version: 6.2.4
+  version: 6.6.3
   targetNamespace: nextcloud
   valuesContent: |-
     image:
-      tag: 30.0.2-fpm-alpine
+      tag: 30.0.5-fpm-alpine
     replicaCount: 2
     ingress:
       enabled: true
@@ -91,17 +91,11 @@ spec:
         persistentVolumeClaim:
           claimName: videos
           readOnly: false
-      - name: shared
-        persistentVolumeClaim:
-          claimName: shared
-          readOnly: false
       extraVolumeMounts:
       - name: photos
         mountPath: /mnt/photos
       - name: videos
         mountPath: /mnt/videos
-      - name: shared
-        mountPath: /mnt/shared
     persistence:
       enabled: true
       storageClass: shared-ssd
