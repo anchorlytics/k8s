@@ -24,17 +24,16 @@ spec:
         args:
         - infinity
         volumeMounts:
-        - name: share
-          mountPath: /mnt/share
         - name: shared
           mountPath: /mnt/shared
+        - name: photos
+          mountPath: /mnt/photos
       volumes:
-      - name: share
-        nfs:
-          server: nfs.home.seanho.com
-          path: /srv/share
-          readOnly: true
       - name: shared
         persistentVolumeClaim:
           claimName: shared
+      - name: photos
+        persistentVolumeClaim:
+          claimName: photos
+          readOnly: false
 
