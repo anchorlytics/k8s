@@ -9,11 +9,11 @@ metadata:
 spec:
   repo: "https://nextcloud.github.io/helm/"
   chart: nextcloud
-  version: 6.6.3
+  version: 6.6.4
   targetNamespace: nextcloud
   valuesContent: |-
     image:
-      tag: 30.0.5-fpm-alpine
+      tag: 30.0.6-fpm-alpine
     replicaCount: 2
     ingress:
       enabled: true
