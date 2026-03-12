@@ -25,7 +25,7 @@ spec:
   valuesContent: |-
     image:
       repository: ghcr.io/zwave-js/zwave-js-ui
-      tag: 10.5.1
+      tag: 11.14.0
     securityContext:
       privileged: true
     envFrom:
