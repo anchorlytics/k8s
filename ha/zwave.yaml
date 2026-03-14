@@ -20,12 +20,12 @@ metadata:
 spec:
   repo: "https://charts.ar80.eu"
   chart: zwave-js-ui
-  version: 0.2.140
+  version: 0.5.9
   targetNamespace: home-assistant
   valuesContent: |-
     image:
       repository: ghcr.io/zwave-js/zwave-js-ui
-      tag: 10.5.1
+      tag: 10.14.0
     securityContext:
       privileged: true
     envFrom:
