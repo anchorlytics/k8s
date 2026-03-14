@@ -1,5 +1,20 @@
 # https://github.com/blakeblackshear/blakeshome-charts/tree/master/charts/frigate
 # https://github.com/blakeblackshear/frigate
+#
+#          cube2_sub:
+#          - ffmpeg:rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@cube2.iot.seanho.com/Streaming/Channels/2
+#
+#        cube2:
+#          motion:
+#            enabled: False
+#          detect:
+#            enabled: False
+#          ffmpeg:
+#            inputs:
+#            - path: rtsp://localhost:8554/cube2_sub
+#              input_args: preset-rtsp-restream
+#              roles:
+#              - detect
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
@@ -13,7 +28,7 @@ spec:
   targetNamespace: home-assistant
   valuesContent: |-
     image:
-      tag: 0.16.0
+      tag: 0.17.0
     ingress:
       enabled: true
       hosts:
@@ -44,7 +59,7 @@ spec:
     - frigate-pw
     config: |
       mqtt:
-        enabled: false
+        enabled: true
         host: mqtt
         user: "{FRIGATE_MQTT_USER}"
         password: "{FRIGATE_MQTT_PASSWORD}"
@@ -82,8 +97,6 @@ spec:
           cube1_sub:
           - ffmpeg:rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@cube1.iot.seanho.com/Streaming/Channels/2
           - "ffmpeg:cube1_sub#audio=opus"
-          cube2_sub:
-          - ffmpeg:rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@cube2.iot.seanho.com/Streaming/Channels/2
       cameras:
         porch:
           motion:
@@ -129,7 +142,7 @@ spec:
               - driveway
           ffmpeg:
             output_args:
-              record: preset-record-generic-audio-copy
+              record: preset-record-generic-audio-aac
             inputs:
             - path: rtsp://localhost:8554/front_rec
               input_args: preset-rtsp-restream
@@ -165,17 +178,6 @@ spec:
           ffmpeg:
             inputs:
             - path: rtsp://localhost:8554/cube1_sub
-              input_args: preset-rtsp-restream
-              roles:
-              - detect
-        cube2:
-          motion:
-            enabled: False
-          detect:
-            enabled: False
-          ffmpeg:
-            inputs:
-            - path: rtsp://localhost:8554/cube2_sub
               input_args: preset-rtsp-restream
               roles:
               - detect
