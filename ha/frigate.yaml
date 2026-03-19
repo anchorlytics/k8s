@@ -156,6 +156,7 @@ spec:
           motion:
             mask:
             - "0.875,0,0.875,0.112,0.967,0.144,1,0.277,1,0"
+            threshold: 40
           ffmpeg:
             output_args:
               record: preset-record-generic-audio-copy
