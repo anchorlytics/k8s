@@ -8,14 +8,16 @@ metadata:
 spec:
   repo: "https://kubernetes-sigs.github.io/node-feature-discovery/charts"
   chart: node-feature-discovery
-  version: 0.13.2
+  version: 0.18.3
   targetNamespace: node-feature-discovery
   valuesContent: |-
     worker:
       config:
         core:
-          sleepInterval: 5m
+          sleepInterval: 15m
         sources:
           usb:
             deviceClassWhiteList: ["02", "03"]
             deviceLabelFields: [vendor, device]
+    prometheus:
+      enable: true
