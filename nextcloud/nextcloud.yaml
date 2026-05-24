@@ -9,7 +9,7 @@ metadata:
 spec:
   repo: "https://nextcloud.github.io/helm/"
   chart: nextcloud
-  version: 6.6.4
+  version: 9.1.0
   targetNamespace: nextcloud
   valuesContent: |-
     image:
@@ -53,6 +53,8 @@ spec:
         hosts:
         - cloud.seanho.com
     nextcloud:
+      podSecurityContext:
+        fsGroupChangePolicy: "OnRootMismatch"
       host: cloud.seanho.com
       existingSecret:
         enabled: true
