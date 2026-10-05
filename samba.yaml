@@ -12,7 +12,7 @@ spec:
   valuesContent: |-
     service:
       type: LoadBalancer
-      loadBalancerIP: 10.90.4.97
+      loadBalancerIP: 10.80.0.97
     additionalVolumeMounts:
       - name: shared
         mountPath: /shared

@@ -20,7 +20,7 @@ spec:
         name: external
         controllerValue: "k8s.io/ingress-external"
       service:
-        loadBalancerIP: 10.90.4.98
+        loadBalancerIP: 10.80.0.98
       config:
         use-http2: true
         use-proxy-protocol: true

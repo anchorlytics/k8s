@@ -19,7 +19,7 @@ spec:
       ingressClassResource:
         default: true
       service:
-        loadBalancerIP: 10.90.4.96
+        loadBalancerIP: 10.80.0.96
       config:
         use-http2: true
     metrics:
